@@ -1,0 +1,22 @@
+.nav {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  align-items: center;
+}
+
+.nav_group_items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item_user {
+  padding-right: 0.3rem;
+}
+
+.nav_item {
+  padding: 0.3rem 1rem;
+}

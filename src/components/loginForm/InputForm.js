@@ -2,7 +2,7 @@ import classes from "./InputForm.module.css";
 
 const Input = ({ name, id, type, onChange, enteredValues, isValid }) => {
   const changeHandler = (event) => {
-    onChange({ ...enteredValues, [id]: event.target.value });
+    onChange(event.target.value);
   };
 
   const classValidation = !isValid ? "input_form" : "input_form_invalid";

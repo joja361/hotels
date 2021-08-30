@@ -1,48 +1,44 @@
 import classes from "./Sign.module.css";
 import InputForm from "./InputForm";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-
-const initialState = {
-  email: "",
-  emailIsValid: false,
-  password: "",
-  passwordIsValid: false,
-};
+import { emailValidator, passwordValidator } from "../../lib/lib";
 
 const SignIn = () => {
-  const [enteredValues, setEnteredValues] = useState(initialState);
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const history = useHistory();
 
-  const handleChange = (newValue) => {
-    setEnteredValues(newValue);
-    setEnteredValues((prev) => ({
-      ...prev,
-      emailIsValid: false,
-      passwordIsValid: false,
-    }));
+  const handleChangeEmail = (newValue) => {
+    setEnteredEmail(newValue);
+    setIsValidEmail(false);
+  };
+
+  const handleChangePassword = (newValue) => {
+    setEnteredPassword(newValue);
+    setIsValidPassword(false);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const emailIsValid =
-      enteredValues.email === "" || !enteredValues.email.includes("@");
-
-    const passwordIsValid =
-      enteredValues.password === "" || enteredValues.password.length < 6;
+    const emailIsValid = emailValidator(enteredEmail);
+    const passwordIsValid = passwordValidator(enteredPassword);
 
     if (emailIsValid || passwordIsValid) {
-      setEnteredValues((prev) => ({
-        ...prev,
-        emailIsValid,
-        passwordIsValid,
-      }));
+      setIsValidEmail(emailIsValid);
+      setIsValidPassword(passwordIsValid);
       return;
     }
 
-    setEnteredValues(initialState);
+    setEnteredEmail("");
+    setEnteredPassword("");
+    setIsValidEmail(false);
+    setIsValidPassword(false);
 
-    console.log("asign");
+    history.push("/dashboard");
   };
 
   return (
@@ -52,19 +48,19 @@ const SignIn = () => {
         name="Email"
         id="email"
         type="text"
-        onChange={handleChange}
-        enteredValues={enteredValues}
-        isValid={enteredValues.emailIsValid}
+        onChange={handleChangeEmail}
+        enteredValues={enteredEmail}
+        isValid={isValidEmail}
       />
       <InputForm
         name="Password"
         id="password"
         type="password"
-        onChange={handleChange}
-        enteredValues={enteredValues}
-        isValid={enteredValues.passwordIsValid}
+        onChange={handleChangePassword}
+        enteredValues={enteredPassword}
+        isValid={isValidPassword}
       />
-      <Link className={classes.link} to="/signup">
+      <Link className={classes.link} to="/dashboard">
         Sing Up
       </Link>
       <button className={classes.button}>Sign In</button>

@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import SignIn from "./components/loginForm/SignIn";
 import SignUp from "./components/loginForm/SignUp";
+import DashBoard from "./pages/DashBoard";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       </Route>
       <Route path="/signup">
         <SignUp />
+      </Route>
+      <Route path="/dashboard">
+        <DashBoard />
       </Route>
     </Switch>
   );
