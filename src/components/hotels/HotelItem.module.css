@@ -1,0 +1,9 @@
+.item_container {
+  display: flex;
+}
+
+.item_details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
