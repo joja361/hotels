@@ -1,12 +1,13 @@
-import Like from "./Like";
-import Rating from "./Rating";
+import Like from "../UI/Like";
+import Rating from "../UI/Rating";
+import classes from "./Header.module.css";
 
 const Header = () => {
   return (
-    <div>
-      <div>
-        <h1>Hotel name</h1>
-        <h3>City</h3>
+    <div className={classes.header_container}>
+      <div className={classes.header_title}>
+        <h3>Hotel name</h3>
+        <p>City</p>
       </div>
       <Like />
       <Rating />

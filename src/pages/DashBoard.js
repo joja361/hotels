@@ -1,25 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/layout/Layout";
 import HotelsList from "../components/hotels/HotelsList";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
-import { fetchHotelData } from "../store/store";
+import classes from "./DashBoard.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHotelData } from "../store/hotelsSlice";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const hotels = useSelector((state) => state);
+  const error = useSelector((state) => state.error);
 
   const fetchData = () => {
     dispatch(fetchHotelData());
   };
 
-  console.log(hotels);
-
   return (
     <Layout>
       <Card>
         <Button title="Load Hotels" onClick={fetchData} />
-        <HotelsList hotels={hotels} />
+        {error ? <h1 className={classes.error}>{error}</h1> : <HotelsList />}
       </Card>
     </Layout>
   );
