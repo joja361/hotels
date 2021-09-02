@@ -1,0 +1,6 @@
+.comment_details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-left: 2rem;
+}

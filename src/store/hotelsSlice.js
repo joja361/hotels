@@ -16,6 +16,9 @@ export const hotelsSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    getComment(state, acition) {
+      console.log(acition.payload);
+    },
   },
 });
 
@@ -41,3 +44,4 @@ export const fetchHotelData = () => {
     }
   };
 };
+

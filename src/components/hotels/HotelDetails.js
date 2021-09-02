@@ -8,7 +8,12 @@ import classes from "./HotelDetails.module.css";
 const HotelDetails = ({ hotel, onShowReview }) => {
   return (
     <div className={classes.item_details}>
-      <Header />
+      <Header
+        name={hotel.name}
+        city={hotel.city}
+        rating={hotel.rating}
+        like={hotel.like}
+      />
       <HotelDescription description={hotel.description} />
       <HotelPrice price={hotel.price} />
       <div className={classes.item_footer}>
