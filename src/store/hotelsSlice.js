@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   hotels: [],
   error: "",
+  loading: null,
 };
 
 export const hotelsSlice = createSlice({
@@ -16,17 +17,17 @@ export const hotelsSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
-    getComment(state, acition) {
-      console.log(acition.payload);
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
   },
 });
 
 export const fetchHotelData = () => {
   return async (dispatch) => {
+    dispatch(hotelsSlice.actions.setLoading(true));
     const fetchData = async () => {
       const response = await fetch("http://localhost:8080/api/hotel");
-
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -35,7 +36,7 @@ export const fetchHotelData = () => {
 
       return responseData;
     };
-
+    dispatch(hotelsSlice.actions.setLoading(false));
     try {
       const data = await fetchData();
       dispatch(hotelsSlice.actions.getData({ data, error: "" }));
@@ -44,4 +45,3 @@ export const fetchHotelData = () => {
     }
   };
 };
-

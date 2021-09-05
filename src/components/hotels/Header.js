@@ -1,12 +1,18 @@
 import Like from "../UI/Like";
 import Rating from "../UI/Rating";
 import classes from "./Header.module.css";
+import { Link, useLocation } from "react-router-dom";
 
-const Header = ({ name, city, rating, like }) => {
+const Header = ({ name, city, rating, like, id }) => {
+  const location = useLocation();
+  const hotelDetailURL = `${location.pathname}/${id}`;
+  
   return (
     <div className={classes.header_container}>
       <div className={classes.header_title}>
-        <h3>{name}</h3>
+        <Link className={classes.hotel_name} to={hotelDetailURL}>
+          {name}
+        </Link>
         <p>{city}</p>
       </div>
       <Like liek={like} />

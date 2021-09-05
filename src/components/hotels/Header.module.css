@@ -19,3 +19,9 @@ p {
 .header_title p {
   color: gray;
 }
+
+.hotel_name {
+  color: black;
+  font-size: 1.7rem;
+  text-decoration: none;
+}

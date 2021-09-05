@@ -1,7 +1,7 @@
 import Header from "./Header";
 import HotelDescription from "./HotelDescription";
 import HotelPrice from "./HotelPrice";
-import Date from "./Date";
+import DateField from "./DateField";
 import Button from "../UI/Button";
 import classes from "./HotelDetails.module.css";
 
@@ -13,11 +13,12 @@ const HotelDetails = ({ hotel, onShowReview }) => {
         city={hotel.city}
         rating={hotel.rating}
         like={hotel.like}
+        id={hotel.id}
       />
       <HotelDescription description={hotel.description} />
       <HotelPrice price={hotel.price} />
       <div className={classes.item_footer}>
-        <Date date={hotel.date} />
+        <DateField date={hotel.date} />
         <Button title={"Show reviews"} onClick={onShowReview} />
       </div>
     </div>

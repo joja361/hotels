@@ -5,10 +5,12 @@ import Card from "../components/UI/Card";
 import classes from "./DashBoard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHotelData } from "../store/hotelsSlice";
+import Spinner from "../components/UI/Spinner";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
+  const isLoading = useSelector((state) => state.loading);
 
   const fetchData = () => {
     dispatch(fetchHotelData());
@@ -18,6 +20,7 @@ const DashBoard = () => {
     <Layout>
       <Card>
         <Button title="Load Hotels" onClick={fetchData} />
+        {isLoading && <Spinner />}
         {error ? <h1 className={classes.error}>{error}</h1> : <HotelsList />}
       </Card>
     </Layout>

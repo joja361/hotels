@@ -2,6 +2,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import SignIn from "./components/loginForm/SignIn";
 import SignUp from "./components/loginForm/SignUp";
 import DashBoard from "./pages/DashBoard";
+import HotelDetail from "./pages/HotelDetail";
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
       <Route path="/signup">
         <SignUp />
       </Route>
-      <Route path="/dashboard">
+      <Route path="/dashboard" exact>
         <DashBoard />
+      </Route>
+      <Route path="/dashboard/:id">
+        <HotelDetail />
       </Route>
     </Switch>
   );
