@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const hotelDetailSlice = createSlice({
-  name: "hotelDetail",
+const hotelDetailSlice = createSlice({
+  name: "hoteldetail",
   initialState: {},
   reducers: {
-    getHotelDetails(state, action) {
-      const detail = action.payload[0];
-      state = detail;
+    getHotelDetail(state, action) {
+      return action.payload;
     },
   },
 });
+
+export default hotelDetailSlice;
 
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
@@ -17,17 +18,17 @@ export const fetchHotelDetail = (id) => {
       const response = await fetch("http://localhost:8080/api/hotel");
 
       if (!response.ok) {
-        throw new Error("Hotel data not found");
+        throw new Error("Hotel Detail not found!");
       }
 
       const responseData = await response.json();
 
-      return responseData.filter((data) => data.id === id);
+      return responseData.filter((hotel) => hotel.id === id)[0];
     };
 
     try {
       const data = await fetchData();
-      dispatch(hotelDetailSlice.actions.getHotelDetails(data));
+      dispatch(hotelDetailSlice.actions.getHotelDetail(data));
     } catch (error) {
       console.log(error.message);
     }

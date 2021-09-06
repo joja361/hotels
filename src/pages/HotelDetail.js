@@ -5,17 +5,18 @@ import { fetchHotelDetail } from "../store/hotelDetailSlice";
 
 const HotelDetail = () => {
   const params = useParams();
+  const id = params.id;
   const dispatch = useDispatch();
-  const hotels = useSelector((store) => store.hoteldetail);
-  console.log(hotels);
+  const details = useSelector((store) => store.hoteldetail);
 
   useEffect(() => {
-    dispatch(fetchHotelDetail(params.id));
-  }, [dispatch, params]);
+    dispatch(fetchHotelDetail(id));
+  }, [dispatch, id]);
 
+  console.log(details);
   return (
     <div>
-      <h1>{params.id}</h1>
+      <h1>{details.name}</h1>
     </div>
   );
 };
