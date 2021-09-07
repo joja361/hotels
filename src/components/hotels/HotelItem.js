@@ -4,7 +4,7 @@ import CommentList from "../comments/CommentList";
 import classes from "./HotelItem.module.css";
 import { useState } from "react";
 
-const HotelItem = ({ hotel, showButton = true }) => {
+const HotelItem = ({ hotel, detailPage = true }) => {
   const [showComments, setShowComments] = useState(false);
 
   const handleShowReview = () => {
@@ -20,11 +20,11 @@ const HotelItem = ({ hotel, showButton = true }) => {
         <HotelDetails
           hotel={hotel}
           onShowReview={handleShowReview}
-          showButton={showButton}
+          detailPage={detailPage}
         />
       </div>
-      {(showButton && showComments && commentList) ||
-        (!showButton && commentList)}
+      {(detailPage && showComments && commentList) ||
+        (!detailPage && commentList)}
     </div>
   );
 };
