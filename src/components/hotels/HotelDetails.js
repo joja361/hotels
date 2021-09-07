@@ -5,7 +5,7 @@ import DateField from "./DateField";
 import Button from "../UI/Button";
 import classes from "./HotelDetails.module.css";
 
-const HotelDetails = ({ hotel, onShowReview }) => {
+const HotelDetails = ({ hotel, onShowReview, showButton }) => {
   return (
     <div className={classes.item_details}>
       <Header
@@ -19,7 +19,7 @@ const HotelDetails = ({ hotel, onShowReview }) => {
       <HotelPrice price={hotel.price} />
       <div className={classes.item_footer}>
         <DateField date={hotel.date} />
-        <Button title={"Show reviews"} onClick={onShowReview} />
+        {showButton && <Button title={"Show reviews"} onClick={onShowReview} />}
       </div>
     </div>
   );

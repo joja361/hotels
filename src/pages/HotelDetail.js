@@ -1,6 +1,11 @@
+import { classExpression } from "@babel/types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import HotelItem from "../components/hotels/HotelItem";
+import Layout from "../components/layout/Layout";
+import Card from "../components/UI/Card";
+import classes from "./HotelDetail.module.css";
 import { fetchHotelDetail } from "../store/hotelDetailSlice";
 
 const HotelDetail = () => {
@@ -13,11 +18,13 @@ const HotelDetail = () => {
     dispatch(fetchHotelDetail(id));
   }, [dispatch, id]);
 
-  console.log(details);
   return (
-    <div>
-      <h1>{details.name}</h1>
-    </div>
+    <Layout>
+      <div className={classes.hotel_detail}>
+        <h1>User view</h1>
+        <HotelItem hotel={details} showButton={false} />
+      </div>
+    </Layout>
   );
 };
 

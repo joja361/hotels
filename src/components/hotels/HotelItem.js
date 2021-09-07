@@ -4,20 +4,27 @@ import CommentList from "../comments/CommentList";
 import classes from "./HotelItem.module.css";
 import { useState } from "react";
 
-const HotelItem = ({ hotel }) => {
+const HotelItem = ({ hotel, showButton = true }) => {
   const [showComments, setShowComments] = useState(false);
 
   const handleShowReview = () => {
     setShowComments(!showComments);
   };
 
+  const commentList = <CommentList id={hotel.id} comments={hotel.comments} />;
+
   return (
     <div className={classes.container}>
       <div className={classes.item_container}>
         <Image image={hotel.img} />
-        <HotelDetails hotel={hotel} onShowReview={handleShowReview} />
+        <HotelDetails
+          hotel={hotel}
+          onShowReview={handleShowReview}
+          showButton={showButton}
+        />
       </div>
-      {showComments && <CommentList id={hotel.id} comments={hotel.comments} />}
+      {(showButton && showComments && commentList) ||
+        (!showButton && commentList)}
     </div>
   );
 };

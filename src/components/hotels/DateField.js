@@ -1,4 +1,4 @@
-const DateField = ({ date }) => {
+const DateField = ({ date = "" }) => {
   const dateParts = date.split("/");
 
   const [year, month, day] = [

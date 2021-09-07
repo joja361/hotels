@@ -14,7 +14,7 @@ const Header = ({ name, city, rating, like, id }) => {
         </Link>
         <p>{city}</p>
       </div>
-      <Like liek={like} />
+      <Like like={like} />
       <Rating rating={rating} />
     </div>
   );
