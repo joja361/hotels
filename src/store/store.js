@@ -5,7 +5,7 @@ import hotelDetailSlice from "./hotelDetailSlice";
 const store = configureStore({
   reducer: {
     hotel: hotelsSlice.reducer,
-    hoteldetail: hotelDetailSlice.reducer,
+    details: hotelDetailSlice.reducer,
   },
 });
 
