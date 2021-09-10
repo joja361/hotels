@@ -10,7 +10,7 @@ const HotelDetail = () => {
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
-  const details = useSelector((store) => store.details);
+  const details = useSelector((store) => store.hotelDetails);
 
   useEffect(() => {
     dispatch(fetchHotelDetail(id));
