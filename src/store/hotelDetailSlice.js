@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const hotelDetailSlice = createSlice({
   name: "hoteldetail",
@@ -14,23 +15,11 @@ export default hotelDetailSlice;
 
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:8080/api/hotel/${id}`);
-
-      if (!response.ok) {
-        throw new Error("Hotel Detail not found!");
-      }
-
-      const responseData = await response.json();
-      
-      return responseData;
-    };
-
-    try {
-      const data = await fetchData();
-      dispatch(hotelDetailSlice.actions.getHotelDetail(data));
-    } catch (error) {
-      console.log(error.message);
-    }
+    await axios
+      .get(`http://localhost:8080/api/hotel/${id}`)
+      .then(({ data }) =>
+        dispatch(hotelDetailSlice.actions.getHotelDetail(data))
+      )
+      .catch((err) => console.log(err.message)); // do I need to catch errors here since we control api
   };
 };

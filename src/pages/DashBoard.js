@@ -9,8 +9,8 @@ import Spinner from "../components/UI/Spinner";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
-  const isLoading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.hotel.error);
+  const isLoading = useSelector((state) => state.hotel.loading);
 
   const fetchData = () => {
     dispatch(fetchHotelData());

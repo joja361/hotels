@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   hotels: [],
@@ -23,25 +24,17 @@ export const hotelsSlice = createSlice({
   },
 });
 
+const { getData, setLoading, setError } = hotelsSlice.actions;
+
 export const fetchHotelData = () => {
   return async (dispatch) => {
-    dispatch(hotelsSlice.actions.setLoading(true));
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:8080/api/hotel");
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const responseData = await response.json();
-
-      return responseData;
-    };
-    dispatch(hotelsSlice.actions.setLoading(false));
-    try {
-      const data = await fetchData();
-      dispatch(hotelsSlice.actions.getData({ data, error: "" }));
-    } catch (error) {
-      dispatch(hotelsSlice.actions.setError(error.message));
-    }
+    dispatch(setLoading(true));
+    await axios //check is there better solution 
+      .get("http://localhost:8080/api/hotel")
+      .then(({ data }) => dispatch(getData({ data, error: "" })))
+      .catch((err) => {
+        dispatch(setError(err.message));
+      });
+    dispatch(setLoading(false));
   };
 };
