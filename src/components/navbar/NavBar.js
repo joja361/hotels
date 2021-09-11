@@ -1,29 +1,26 @@
 import { NavLink } from "react-router-dom";
-import classes from "./NavBar.module.css";
 import { FaUserAlt } from "react-icons/fa";
+
+import Navbar from "react-bootstrap/Navbar";
 
 const NavBar = () => {
   return (
-    <nav className={classes.nav}>
-      <div className={classes.nav_group_items}>
-        <NavLink className={classes.nav_item} to="/dashboard">
-          Dashboard
-        </NavLink>
-        <NavLink className={classes.nav_item} to="/">
+    <Navbar className="d-flex justify-content-between bg-light p-3">
+      <div>
+        <NavLink to="dashboard">Dashboard</NavLink>
+        <NavLink className="ps-3" to="/">
           Favorites
         </NavLink>
       </div>
-      <div className={classes.nav_group_items}>
-        <div className={classes.nav_group_items}>
-          <p className={classes.item_user}>username@gmail.com</p>
+      <div className="d-flex">
+        <div className="d-flex align-items-center  pe-3">
+          <p className="mb-0 pe-1">username@gmail.com</p>
           <FaUserAlt />
         </div>
-        <NavLink className={classes.nav_item} to="/signin">
-          Sign Out
-        </NavLink>
+        <NavLink to="/signin">Sign Out</NavLink>
       </div>
-    </nav>
-);
+    </Navbar>
+  );
 };
 
 export default NavBar;

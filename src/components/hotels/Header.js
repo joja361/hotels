@@ -1,14 +1,16 @@
 import Like from "../UI/Like";
 import Rating from "../UI/Rating";
-import classes from "./Header.module.css";
 import { Link, useRouteMatch } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 
 const Header = ({ name, city, rating, like, id, detailPage }) => {
   const match = useRouteMatch();
 
   const link = (
     <Link
-      className={classes.hotel_name}
+      className="display-6"
+      style={{ color: "black", textDecoration: "none" }}
       to={`${match.url}/${id}`}
       target="_blank"
     >
@@ -17,14 +19,18 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   );
 
   return (
-    <div className={classes.header_container}>
-      <div className={classes.header_title}>
-        {detailPage ? link : <p className={classes.hotel_name}>{name}</p>}
-        <p>{city}</p>
+    <Container className="d-flex justify-content-between align-items-center mb-2 p-0">
+      <div>
+        {detailPage ? (
+          link
+        ) : (
+          <Card.Title className="display-6">{name}</Card.Title>
+        )}
+        <p className="text-muted mb-0">{city}</p>
       </div>
       <Like like={like} />
       <Rating rating={rating} />
-    </div>
+    </Container>
   );
 };
 

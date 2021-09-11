@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import HotelItem from "../components/hotels/HotelItem";
 import Layout from "../components/layout/Layout";
-import classes from "./HotelDetail.module.css";
 import { fetchHotelDetail } from "../store/hotelDetailSlice";
+import { Container } from "react-bootstrap";
 
 const HotelDetail = () => {
   const params = useParams();
@@ -18,10 +18,10 @@ const HotelDetail = () => {
 
   return (
     <Layout>
-      <div className={classes.hotel_detail}>
-        <h1>User view</h1>
+      <Container className="mt-2">
+        <h1 className="display-4">User view</h1>
         <HotelItem hotel={details} detailPage={false} />
-      </div>
+      </Container>
     </Layout>
   );
 };

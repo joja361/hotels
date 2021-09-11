@@ -1,13 +1,19 @@
 import LikeHand from "../UI/LikeHand";
-import Name from "./Name";
-import classes from "./CommentHeader.module.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const CommentHeader = ({ firstName, lastName, like }) => {
+  const name = `${firstName} ${lastName}`;
+
   return (
-    <div className={classes.comment_header}>
-      <Name firstName={firstName} lastName={lastName} />
-      <LikeHand like={like} />
-    </div>
+    <Row>
+      <Col md={4}>
+        <h5>{name}</h5>
+      </Col>
+      <Col md={8}>
+        <LikeHand like={like} />
+      </Col>
+    </Row>
   );
 };
 

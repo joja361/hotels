@@ -1,8 +1,10 @@
 import Image from "../UI/Image";
 import HotelDetails from "./HotelDetails";
 import CommentList from "../comments/CommentList";
-import classes from "./HotelItem.module.css";
 import { useState } from "react";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 const HotelItem = ({ hotel, detailPage = true }) => {
   const [showComments, setShowComments] = useState(false);
@@ -14,18 +16,25 @@ const HotelItem = ({ hotel, detailPage = true }) => {
   const commentList = <CommentList id={hotel.id} comments={hotel.comments} />;
 
   return (
-    <div className={classes.container}>
-      <div className={classes.item_container}>
-        <Image image={hotel.img} />
-        <HotelDetails
-          hotel={hotel}
-          onShowReview={handleShowReview}
-          detailPage={detailPage}
-        />
-      </div>
+    <>
+      <Card className="mb-3 border-0">
+        <Row style={{ minHeight: "17rem" }}>
+          <Col md={5}>
+            <Image image={hotel.img} />
+          </Col>
+          <Col md={7} className="d-flex flex-grow-1">
+            <HotelDetails
+              hotel={hotel}
+              onShowReview={handleShowReview}
+              detailPage={detailPage}
+              showComments={showComments}
+            />
+          </Col>
+        </Row>
+      </Card>
       {(detailPage && showComments && commentList) ||
         (!detailPage && commentList)}
-    </div>
+    </>
   );
 };
 

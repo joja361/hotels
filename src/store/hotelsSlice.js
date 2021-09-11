@@ -29,7 +29,7 @@ const { getData, setLoading, setError } = hotelsSlice.actions;
 export const fetchHotelData = () => {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    await axios //check is there better solution 
+    await axios //check is there better solution
       .get("http://localhost:8080/api/hotel")
       .then(({ data }) => dispatch(getData({ data, error: "" })))
       .catch((err) => {

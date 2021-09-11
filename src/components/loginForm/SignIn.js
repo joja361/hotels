@@ -1,70 +1,63 @@
-import classes from "./Sign.module.css";
-import InputForm from "./InputForm";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { emailValidator, passwordValidator } from "../../lib/lib";
+
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const SignIn = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [enteredPassword, setEnteredPassword] = useState("");
-  const [isValidPassword, setIsValidPassword] = useState(false);
   const history = useHistory();
 
-  const handleChangeEmail = (newValue) => {
-    setEnteredEmail(newValue);
-    setIsValidEmail(false);
+  const handleChangeEmail = (event) => {
+    setEnteredEmail(event.target.value);
   };
 
-  const handleChangePassword = (newValue) => {
-    setEnteredPassword(newValue);
-    setIsValidPassword(false);
+  const handleChangePassword = (event) => {
+    setEnteredPassword(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-
-    const emailIsValid = emailValidator(enteredEmail);
-    const passwordIsValid = passwordValidator(enteredPassword);
-
-    if (emailIsValid || passwordIsValid) {
-      setIsValidEmail(emailIsValid);
-      setIsValidPassword(passwordIsValid);
-      return;
-    }
-
     setEnteredEmail("");
     setEnteredPassword("");
-    setIsValidEmail(false);
-    setIsValidPassword(false);
 
     history.push("/dashboard");
   };
 
   return (
-    <form onSubmit={submitHandler} className={classes.container}>
-      <h1 className={classes.header}>Sign In</h1>
-      <InputForm
-        name="Email"
-        id="email"
-        type="text"
-        onChange={handleChangeEmail}
-        enteredValues={enteredEmail}
-        isValid={isValidEmail}
-      />
-      <InputForm
-        name="Password"
-        id="password"
-        type="password"
-        onChange={handleChangePassword}
-        enteredValues={enteredPassword}
-        isValid={isValidPassword}
-      />
-      <Link className={classes.link} to="/dashboard">
+    <Form
+      className="mx-auto"
+      style={{ maxWidth: 400, marginTop: `10rem` }}
+      onSubmit={submitHandler}
+    >
+      <Form.Group className="mb-3" controlId="formEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          onChange={handleChangeEmail}
+          value={enteredEmail}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          onChange={handleChangePassword}
+          value={enteredPassword}
+        />
+      </Form.Group>
+      <Link className="d-block mb-2" to="/signup">
         Sing Up
       </Link>
-      <button className={classes.button}>Sign In</button>
-    </form>
+      <div className="d-grid">
+        <Button variant="primary" type="submit">
+          Sign in
+        </Button>
+      </div>
+    </Form>
   );
 };
 

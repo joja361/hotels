@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import SubCard from "../UI/SubCard";
 import HotelItem from "./HotelItem";
 
 const HotelsList = () => {
@@ -9,7 +8,7 @@ const HotelsList = () => {
     <HotelItem key={hotel.id} hotel={hotel} />
   ));
 
-  return <SubCard>{HotelList}</SubCard>;
+  return <div className="mt-4">{HotelList}</div>;
 };
 
 export default HotelsList;

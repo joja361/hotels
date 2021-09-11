@@ -1,12 +1,10 @@
 import CommentHeader from "./CommentHeader";
-import Comment from "./Comment";
-import classes from "./CommentDetails.module.css";
 
 const CommentDetails = ({ firstName, lastName, like, comment }) => {
   return (
-    <div className={classes.comment_details}>
+    <div className="d-flex flex-column">
       <CommentHeader firstName={firstName} lastName={lastName} like={like} />
-      <Comment comment={comment} />
+      <p>{comment}</p>
     </div>
   );
 };

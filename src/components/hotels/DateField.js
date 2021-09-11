@@ -17,7 +17,7 @@ const DateField = ({ date = "" }) => {
 
   const dateFormated = newDate.toLocaleDateString("en-GB", options);
 
-  return <p>{dateFormated}</p>;
+  return <p className="mb-0">{dateFormated}</p>;
 };
 
 export default DateField;

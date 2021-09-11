@@ -1,11 +1,11 @@
 import Layout from "../components/layout/Layout";
 import HotelsList from "../components/hotels/HotelsList";
-import Button from "../components/UI/Button";
-import Card from "../components/UI/Card";
-import classes from "./DashBoard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHotelData } from "../store/hotelsSlice";
 import Spinner from "../components/UI/Spinner";
+
+import Button from "react-bootstrap/Button";
+import { Container } from "react-bootstrap";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -18,11 +18,11 @@ const DashBoard = () => {
 
   return (
     <Layout>
-      <Card>
-        <Button title="Load Hotels" onClick={fetchData} />
+      <Container className="mt-4" style={{ maxWidth: 800 }}>
+        <Button onClick={fetchData}>Load Hotels</Button>
         {isLoading && <Spinner />}
-        {error ? <h1 className={classes.error}>{error}</h1> : <HotelsList />}
-      </Card>
+        {error ? <h1 className="mt-4 text-center">{error}</h1> : <HotelsList />}
+      </Container>
     </Layout>
   );
 };

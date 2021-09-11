@@ -1,13 +1,13 @@
 import Header from "./Header";
-import HotelDescription from "./HotelDescription";
 import HotelPrice from "./HotelPrice";
 import DateField from "./DateField";
-import Button from "../UI/Button";
-import classes from "./HotelDetails.module.css";
+
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 const HotelDetails = ({ hotel, onShowReview, detailPage }) => {
   return (
-    <div className={classes.item_details}>
+    <Card.Body className="p-0 d-flex flex-column justify-content-between">
       <Header
         name={hotel.name}
         city={hotel.city}
@@ -16,13 +16,13 @@ const HotelDetails = ({ hotel, onShowReview, detailPage }) => {
         id={hotel.id}
         detailPage={detailPage}
       />
-      <HotelDescription description={hotel.description} />
+      <Card.Text className="d-flex flex-grow-1">{hotel.description}</Card.Text>
       <HotelPrice price={hotel.price} />
-      <div className={classes.item_footer}>
+      <div className="d-flex justify-content-between align-items-center p-0">
         <DateField date={hotel.date} />
-        {detailPage && <Button title={"Show reviews"} onClick={onShowReview} />}
+        {detailPage && <Button onClick={onShowReview}>Show reviews</Button>}
       </div>
-    </div>
+    </Card.Body>
   );
 };
 
