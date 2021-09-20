@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import SignIn from "./components/loginForm/SignIn";
 import SignUp from "./components/loginForm/SignUp";
@@ -5,6 +6,8 @@ import DashBoard from "./pages/DashBoard";
 import HotelDetail from "./pages/HotelDetail";
 
 function App() {
+  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+
   return (
     <Switch>
       <Route path="/" exact>
@@ -17,10 +20,15 @@ function App() {
         <SignUp />
       </Route>
       <Route path="/dashboard" exact>
-        <DashBoard />
+        {isLoggedIn && <DashBoard />}
+        {!isLoggedIn && <Redirect to="/" />}
       </Route>
       <Route path="/dashboard/:id">
-        <HotelDetail />
+        {isLoggedIn && <HotelDetail />}
+        {!isLoggedIn && <Redirect to="/" />}
+      </Route>
+      <Route path="*">
+        <Redirect to="/" />
       </Route>
     </Switch>
   );

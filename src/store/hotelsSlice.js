@@ -7,7 +7,7 @@ const initialState = {
   loading: null,
 };
 
-export const hotelsSlice = createSlice({
+const hotelsSlice = createSlice({
   name: "hotels",
   initialState: initialState,
   reducers: {
@@ -24,6 +24,7 @@ export const hotelsSlice = createSlice({
   },
 });
 
+export default hotelsSlice;
 const { getData, setLoading, setError } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {
