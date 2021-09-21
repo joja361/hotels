@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <Navbar className="d-flex justify-content-between bg-light p-3">
       <div>
-        <NavLink to="dashboard">Dashboard</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink className="ps-3" to="/">
           Favorites
         </NavLink>

@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const isAlreadyLoggedIn = localStorage.getItem("token");
+
 const initialState = {
-  token: null,
-  isLoggedIn: false,
+  token: isAlreadyLoggedIn,
+  isLoggedIn: !!isAlreadyLoggedIn,
   username: "",
 };
 

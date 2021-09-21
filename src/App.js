@@ -8,6 +8,8 @@ import HotelDetail from "./pages/HotelDetail";
 function App() {
   const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
 
+  console.log(isLoggedIn);
+
   return (
     <Switch>
       <Route path="/" exact>
