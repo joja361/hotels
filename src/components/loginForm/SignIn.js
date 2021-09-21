@@ -97,6 +97,14 @@ const SignIn = () => {
           errorMessage: err.message,
         })
       );
+
+    // axios
+    //   .post("http://localhost:8080/api/auth/login", {
+    //     email: enteredEmail,
+    //     password: enteredPassword,
+    //   })
+    //   .then((res) => console.log(res.data));
+    // SERVER DOESN'T RETURN ME A TOKEN
   };
 
   return (

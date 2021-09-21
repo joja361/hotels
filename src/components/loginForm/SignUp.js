@@ -1,13 +1,32 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {
+  isConfirmPasswordValid,
+  isEmailValid,
+  isPasswordValid,
+} from "../../lib/lib";
+import axios from "axios";
+import InputGroup from "react-bootstrap/InputGroup";
 
 const SignUp = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
+  const [isEnteredEmailInvalid, setIsEnteredEmailInvalid] = useState({
+    isInvalid: null,
+    errorMessage: "",
+  });
+  const [isEnteredPasswordInvalid, setIsEnteredPasswordInvalid] = useState({
+    isInvalid: null,
+    errorMessage: "",
+  });
+  const [isEnteredConfirmPasswordInvalid, setIsEnteredConfirmPasswordInvalid] =
+    useState({
+      isInvalid: null,
+      errorMessage: "",
+    });
 
   const handleEmailChange = (event) => {
     setEnteredEmail(event.target.value);
@@ -24,9 +43,38 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setEnteredEmail("");
-    setEnteredPassword("");
-    setEnteredConfirmPassword("");
+    const emailIsValid = isEmailValid(enteredEmail);
+    const passwordIsValid = isPasswordValid(enteredPassword);
+    const confirmPasswordIsValid = isConfirmPasswordValid(
+      enteredPassword,
+      enteredConfirmPassword
+    );
+
+    const validEnteredValues =
+      emailIsValid && passwordIsValid && confirmPasswordIsValid;
+
+    if (!validEnteredValues) {
+      setIsEnteredEmailInvalid({
+        isInvalid: !emailIsValid,
+        errorMessage: "Entered e-mail can't be empty and must include @",
+      });
+      setIsEnteredPasswordInvalid({
+        isInvalid: !passwordIsValid,
+        errorMessage: "Entered password must contain at least 6 characters",
+      });
+      setIsEnteredConfirmPasswordInvalid({
+        isInvalid: !confirmPasswordIsValid,
+        errorMessage: "Passwords must be equal",
+      });
+      return;
+    }
+
+    axios
+      .post("http://localhost:8080/api/user", {
+        email: enteredEmail,
+        password: enteredPassword,
+      })
+      .then((res) => console.log(res)); //post return me empty data do I need id to be returned
 
     console.log("assign");
   };
@@ -36,33 +84,52 @@ const SignUp = () => {
       className="mx-auto"
       onSubmit={handleSubmit}
       style={{ maxWidth: 400, marginTop: `10rem` }}
+      noValidate
     >
       <Form.Group className="mb-3" controlId="formEmail">
         <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          value={enteredEmail}
-          onChange={handleEmailChange}
-        />
+        <InputGroup hasValidation>
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={enteredEmail}
+            onChange={handleEmailChange}
+            isInvalid={isEnteredEmailInvalid.isInvalid}
+          />
+          <Form.Control.Feedback type="invalid">
+            {isEnteredEmailInvalid.errorMessage}
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={enteredPassword}
-          onChange={handleChangePassword}
-        />
+        <InputGroup hasValidation>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={enteredPassword}
+            onChange={handleChangePassword}
+            isInvalid={isEnteredPasswordInvalid.isInvalid}
+          />
+          <Form.Control.Feedback type="invalid">
+            {isEnteredPasswordInvalid.errorMessage}
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formConfirm">
         <Form.Label>Confirm</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Confirm password"
-          value={enteredConfirmPassword}
-          onChange={handleChangePasswordConfirm}
-        />
+        <InputGroup hasValidation>
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            value={enteredConfirmPassword}
+            onChange={handleChangePasswordConfirm}
+            isInvalid={isEnteredConfirmPasswordInvalid.isInvalid}
+          />
+          <Form.Control.Feedback type="invalid">
+            {isEnteredConfirmPasswordInvalid.errorMessage}
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
       <Link className="d-block mb-2" to="/signin">
         Sign in

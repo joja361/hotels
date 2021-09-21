@@ -1,9 +1,6 @@
-import { useSelector } from "react-redux";
 import HotelItem from "./HotelItem";
 
-const HotelsList = () => {
-  const hotels = useSelector((store) => store.hotel.hotels);
-
+const HotelsList = ({ hotels }) => {
   const HotelList = hotels.map((hotel) => (
     <HotelItem key={hotel.id} hotel={hotel} />
   ));

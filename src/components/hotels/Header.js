@@ -29,7 +29,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
         <p className="text-muted mb-0">{city}</p>
       </div>
       <Like like={like} />
-      <Rating rating={rating} />
+      <Rating rating={rating} hotelId={id} />
     </Container>
   );
 };
