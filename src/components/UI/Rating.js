@@ -3,11 +3,11 @@ import Star from "./Star";
 
 const Rating = ({ rating = null, hotelId }) => {
   const handleRating = (rate) => {
+    console.log(rate)
     axios
       .post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
         rating: rate,
       })
-      .then((res) => console.log(res));
   };
 
   let stars = [];

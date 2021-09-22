@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {
   isConfirmPasswordValid,
@@ -8,7 +9,6 @@ import {
   isPasswordValid,
 } from "../../lib/lib";
 import axios from "axios";
-import InputGroup from "react-bootstrap/InputGroup";
 
 const SignUp = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -27,6 +27,8 @@ const SignUp = () => {
       isInvalid: null,
       errorMessage: "",
     });
+
+  const history = useHistory();
 
   const handleEmailChange = (event) => {
     setEnteredEmail(event.target.value);
@@ -74,9 +76,21 @@ const SignUp = () => {
         email: enteredEmail,
         password: enteredPassword,
       })
-      .then((res) => console.log(res)); //post return me empty data do I need id to be returned
-
-    console.log("assign");
+      .then((res) => {
+        setIsEnteredEmailInvalid({
+          isInvalid: false,
+          errorMessage: "",
+        });
+        setIsEnteredPasswordInvalid({
+          isInvalid: false,
+          errorMessage: "",
+        });
+        setIsEnteredConfirmPasswordInvalid({
+          isInvalid: false,
+          errorMessage: "",
+        });
+        history.replace("/signin");
+      });
   };
 
   return (
