@@ -63,48 +63,31 @@ const SignIn = () => {
     }
 
     axios
-      .get("http://localhost:8080/api/user")
-      .then((res) => {
-        const index = res.data.findIndex(
-          (item) =>
-            item.email === enteredEmail && item.password === enteredPassword
-        );
-        if (index !== -1) {
-          setEnteredEmail("");
-          setEnteredPassword("");
-          return res.data[index];
-        } else {
-          setIsEnteredEmailInvalid({
-            isInvalid: false,
-            errorMessage: "",
-          });
-          setIsEnteredPasswordInvalid({
-            isInvalid: false,
-            errorMessage: "",
-          });
-          throw new Error(
-            "Your e-mail or password are incorrect, please check once again!"
-          );
-        }
+      .post("http://localhost:8080/api/auth/login", {
+        email: enteredEmail,
+        password: enteredPassword,
       })
-      .then((data) => {
-        dispatch(login({ email: data.email, id: data.id }));
+      .then((res) => {
+        dispatch(login({ email: enteredEmail, id: res.data.token }));
+        setEnteredEmail("");
+        setEnteredPassword("");
         history.replace("/dashboard");
       })
-      .catch((err) =>
+      .catch((err) => {
+        setIsEnteredEmailInvalid({
+          isInvalid: false,
+          errorMessage: "",
+        });
+        setIsEnteredPasswordInvalid({
+          isInvalid: false,
+          errorMessage: "",
+        });
         setAreEnteredCredentialValid({
           isInvalid: true,
-          errorMessage: err.message,
-        })
-      );
-
-    // axios
-    //   .post("http://localhost:8080/api/auth/login", {
-    //     email: enteredEmail,
-    //     password: enteredPassword,
-    //   })
-    //   .then((res) => console.log(res.data));
-    // SERVER DOESN'T RETURN ME A TOKEN
+          errorMessage:
+            "Your e-mail or password are incorrect, please check once again!",
+        });
+      });
   };
 
   return (
