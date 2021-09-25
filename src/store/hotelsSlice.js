@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
@@ -21,11 +21,25 @@ const hotelsSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
+    changeRating(state, action) {
+      const index = state.hotels.findIndex(
+        (item) => item.id === action.payload.hotelId
+      );
+      return {
+        ...state,
+        hotels: [
+          ...state.hotels.slice(0, index),
+          { ...state.hotels[index], rating: action.payload.rate },
+          ...state.hotels.slice(index + 1),
+        ],
+      };
+    },
   },
 });
 
 export default hotelsSlice;
 const { getData, setLoading, setError } = hotelsSlice.actions;
+export const { changeRating } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {
   return async (dispatch) => {
