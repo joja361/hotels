@@ -1,15 +1,16 @@
 import classes from "./Like.module.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeLike } from "../../store/hotelsSlice";
 
-const Like = ({ like }) => {
-  const [likeHeart, setLikeHeart] = useState(like);
+const Like = ({ like, hotelId }) => {
+  const dispatch = useDispatch();
 
   const handleLike = () => {
-    setLikeHeart(!likeHeart);
+    dispatch(changeLike({ hotelId, like: !like }));
   };
 
-  const showLike = likeHeart ? (
+  const showLike = like ? (
     <AiFillHeart className={classes.heart} />
   ) : (
     <AiOutlineHeart className={classes.heart} />

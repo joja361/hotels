@@ -34,12 +34,27 @@ const hotelsSlice = createSlice({
         ],
       };
     },
+
+    changeLike(state, action) {
+      const index = state.hotels.findIndex(
+        (item) => item.id === action.payload.hotelId
+      );
+
+      return {
+        ...state,
+        hotels: [
+          ...state.hotels.slice(0, index),
+          { ...state.hotels[index], like: action.payload.like },
+          ...state.hotels.slice(index + 1),
+        ],
+      };
+    },
   },
 });
 
 export default hotelsSlice;
 const { getData, setLoading, setError } = hotelsSlice.actions;
-export const { changeRating } = hotelsSlice.actions;
+export const { changeRating, changeLike } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {
   return async (dispatch) => {
