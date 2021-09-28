@@ -3,9 +3,8 @@ import HotelsList from "../components/hotels/HotelsList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHotelData } from "../store/hotelsSlice";
 import Spinner from "../components/UI/Spinner";
-
-import Button from "react-bootstrap/Button";
 import { Container } from "react-bootstrap";
+import { useEffect } from "react";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -13,14 +12,13 @@ const DashBoard = () => {
   const error = useSelector((state) => state.hotel.error);
   const isLoading = useSelector((state) => state.hotel.loading);
 
-  const fetchData = () => {
+  useEffect(() => {
     dispatch(fetchHotelData());
-  };
+  }, [dispatch]);
 
   return (
     <Layout>
       <Container className="mt-4" style={{ maxWidth: 800 }}>
-        <Button onClick={fetchData}>Load Hotels</Button>
         {isLoading && <Spinner />}
         {error ? (
           <h1 className="mt-4 text-center">{error}</h1>
