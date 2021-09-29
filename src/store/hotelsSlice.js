@@ -21,8 +21,19 @@ const hotelsSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
+
     changeRating(state, action) {
-      console.log(action.payload);
+      const index = state.hotels.findIndex(
+        (item) => item.id === action.payload.hotelId
+      );
+      return {
+        ...state,
+        hotels: [
+          ...state.hotels.slice(0, index),
+          { ...state.hotels[index], rating: action.payload.rate },
+          ...state.hotels.slice(index + 1),
+        ],
+      };
     },
 
     changeLike(state, action) {

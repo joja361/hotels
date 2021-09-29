@@ -1,18 +1,20 @@
+import Star from "./Star";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeRating } from "../../store/hotelsSlice";
-import Star from "./Star";
-import { changeRatingWithPost } from "../../store/hotelsSlice";
-import axios from "axios";
 
 const Rating = ({ rating = null, hotelId }) => {
   const dispatch = useDispatch();
 
-  const handleRating = (rate) => {
-    axios
-      .post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
-        rating: 2,
-      })
-      .then((res) => console.log(res.data));
+  const handleRating = async (rate) => {
+    try {
+      await axios.post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
+        rating: rate,
+      });
+      dispatch(changeRating({ hotelId, rate }));
+    } catch (err) {
+      console.log("Something went wrong");
+    }
   };
 
   let stars = [];
