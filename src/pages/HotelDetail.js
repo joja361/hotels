@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import HotelItem from "../components/hotels/HotelItem";
 import Layout from "../components/layout/Layout";
-import { fetchHotelDetail } from "../store/hotelDetailSlice";
+import { fetchHotelDetail } from "../store/hotelsSlice";
 import { Container } from "react-bootstrap";
 
 const HotelDetail = () => {
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
-  const details = useSelector((store) => store.hotelDetails);
+  const hotel = useSelector((store) => store.hotel.hotelDetail);
 
   useEffect(() => {
     dispatch(fetchHotelDetail(id));
@@ -20,7 +20,7 @@ const HotelDetail = () => {
     <Layout>
       <Container className="mt-2">
         <h1 className="display-4">User view</h1>
-        <HotelItem hotel={details} detailPage={false} />
+        <HotelItem hotel={hotel} detailPage={false} />
       </Container>
     </Layout>
   );

@@ -6,7 +6,7 @@ import authSlice from "./authSlice";
 const store = configureStore({
   reducer: {
     hotel: hotelsSlice.reducer,
-    hotelDetails: hotelDetailSlice.reducer,
+    // hotelDetails: hotelDetailSlice.reducer,
     auth: authSlice.reducer,
   },
 });

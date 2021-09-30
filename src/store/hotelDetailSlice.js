@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { token } from "./authSlice";
 
 const hotelDetailSlice = createSlice({
   name: "hoteldetail",
@@ -16,7 +17,9 @@ export default hotelDetailSlice;
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
     await axios
-      .get(`http://localhost:8080/api/hotel/${id}`)
+      .get(`http://localhost:8080/api/hotel/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(({ data }) =>
         dispatch(hotelDetailSlice.actions.getHotelDetail(data))
       )

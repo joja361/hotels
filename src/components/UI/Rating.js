@@ -2,15 +2,22 @@ import Star from "./Star";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeRating } from "../../store/hotelsSlice";
+import { token } from "../../store/authSlice";
 
 const Rating = ({ rating = null, hotelId }) => {
   const dispatch = useDispatch();
 
   const handleRating = async (rate) => {
     try {
-      await axios.post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
-        rating: rate,
-      });
+      await axios.post(
+        `http://localhost:8080/api/hotel/${hotelId}/rating`,
+        {
+          rating: rate,
+        },
+        {
+          headers: { Authenticatin: `Bearer ${token}` },
+        }
+      );
       dispatch(changeRating({ hotelId, rate }));
     } catch (err) {
       console.log("Something went wrong");

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const isAlreadyLoggedIn = localStorage.getItem("token");
+export const token = localStorage.getItem("token");
 const username = localStorage.getItem("email");
 
 const initialState = {
-  token: isAlreadyLoggedIn,
-  isLoggedIn: !!isAlreadyLoggedIn,
+  token: token,
+  isLoggedIn: !!token,
   username,
 };
 
