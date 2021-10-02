@@ -1,11 +1,11 @@
 import Header from "./Header";
 import HotelPrice from "./HotelPrice";
 import DateField from "./DateField";
-
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
-const HotelDetails = ({ hotel, onShowReview, detailPage }) => {
+const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
   return (
     <Card.Body className="p-0 d-flex flex-column justify-content-between">
       <Header
@@ -20,7 +20,14 @@ const HotelDetails = ({ hotel, onShowReview, detailPage }) => {
       <HotelPrice price={hotel.price} />
       <div className="d-flex justify-content-between align-items-center p-0">
         <DateField date={hotel.date} />
-        {detailPage && <Button onClick={onShowReview}>Show reviews</Button>}
+        {detailPage && (
+          <Button onClick={onShowReview}>
+            <span style={{ marginRight: "0.5rem" }}>
+              {showComments ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+            </span>
+            Show reviews
+          </Button>
+        )}
       </div>
     </Card.Body>
   );
