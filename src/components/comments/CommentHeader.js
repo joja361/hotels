@@ -1,6 +1,6 @@
-import LikeHand from "../UI/LikeHand";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 const CommentHeader = ({ firstName, lastName, like }) => {
   const name = `${firstName} ${lastName}`;
@@ -11,7 +11,15 @@ const CommentHeader = ({ firstName, lastName, like }) => {
         <h5>{name}</h5>
       </Col>
       <Col md={8}>
-        <LikeHand like={like} />
+        {like ? (
+          <AiOutlineLike
+            style={{ color: "green", width: "auto", height: "100%" }}
+          />
+        ) : (
+          <AiOutlineDislike
+            style={{ color: "red", width: "auto", height: "100%" }}
+          />
+        )}
       </Col>
     </Row>
   );

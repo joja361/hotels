@@ -2,8 +2,8 @@ import classes from "./Like.module.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { changeLike } from "../../store/hotelsSlice";
-import axios from "axios";
 import { token } from "../../store/authSlice";
+import axios from "axios";
 
 const Like = ({ like, hotelId }) => {
   const dispatch = useDispatch();
