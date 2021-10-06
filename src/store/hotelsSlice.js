@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { token } from "./authSlice";
+import { authAxios } from "./authSlice";
 
 const initialState = {
   hotels: [],
@@ -68,10 +67,8 @@ export const { changeRating, changeLike } = hotelsSlice.actions;
 export const fetchHotelData = () => {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    await axios
-      .get("http://localhost:8080/api/hotel", {
-        headers: { Authentication: `Bearer ${token}` },
-      })
+    await authAxios
+      .get("/hotel")
       .then(({ data }) => dispatch(getData({ data, error: "" })))
       .catch((err) => {
         dispatch(setError(err.message));
@@ -82,10 +79,8 @@ export const fetchHotelData = () => {
 
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
-    await axios
-      .get(`http://localhost:8080/api/hotel/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    await authAxios
+      .get(`/hotel/${id}`)
       .then(({ data }) => dispatch(hotelsSlice.actions.getHotelDetail(data)))
       .catch((err) => console.log(err.message));
   };

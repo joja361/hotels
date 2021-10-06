@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const token = localStorage.getItem("token");
 const username = localStorage.getItem("email");
+
+export const authAxios = axios.create({
+  baseURL: "http://localhost:8080/api",
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
 const initialState = {
   token: token,
