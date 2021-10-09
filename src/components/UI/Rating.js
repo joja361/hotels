@@ -2,7 +2,6 @@ import Star from "./Star";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeRating } from "../../store/hotelsSlice";
-import { token } from "../../store/authSlice";
 
 const Rating = ({ rating = null, hotelId }) => {
   const dispatch = useDispatch();

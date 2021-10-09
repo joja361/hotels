@@ -4,6 +4,10 @@ import axios from "axios";
 export const token = localStorage.getItem("token");
 const username = localStorage.getItem("email");
 
+export const baseUrl = axios.create({
+  baseURL: "http://localhost:8080/api",
+});
+
 export const authAxios = axios.create({
   baseURL: "http://localhost:8080/api",
   headers: {
@@ -32,6 +36,7 @@ const authSlice = createSlice({
     },
     logout() {
       localStorage.removeItem("token");
+      localStorage.removeItem("email");
       return { token: null, isLoggedIn: false, username: "" };
     },
   },

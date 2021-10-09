@@ -1,9 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 import { Formik, Form } from "formik";
 import InputField from "./InputField";
 import * as Yup from "yup";
+import { baseUrl } from "../../store/authSlice";
 
 const SignUp = () => {
   const history = useHistory();
@@ -30,9 +30,7 @@ const SignUp = () => {
 
   const onSubmit = async (values) => {
     console.log(values);
-    await axios
-      .post("http://localhost:8080/api/user", values)
-      .then(history.replace("./signin"));
+    await baseUrl.post("/user", values).then(history.replace("./signin"));
   };
 
   return (
@@ -52,7 +50,7 @@ const SignUp = () => {
           type="password"
           name="passwordConfirmation"
         />
-        <Link className="d-block mb-2" to="/signin">
+        <Link className="d-block mb-2 w-50" to="/signin">
           Sign in
         </Link>
         <Button variant="primary" type="submit" className="w-50">

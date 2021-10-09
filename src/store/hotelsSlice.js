@@ -3,9 +3,9 @@ import { authAxios } from "./authSlice";
 
 const initialState = {
   hotels: [],
-  error: "",
-  loading: null,
   hotelDetail: {},
+  loading: null,
+  error: "",
 };
 
 const hotelsSlice = createSlice({
