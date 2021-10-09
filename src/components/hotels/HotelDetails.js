@@ -15,14 +15,14 @@ const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
         like={hotel.like}
         id={hotel.id}
         detailPage={detailPage}
-      />
+      /> 
       <Card.Text className="d-flex flex-grow-1">{hotel.description}</Card.Text>
       <HotelPrice price={hotel.price} />
       <div className="d-flex justify-content-between align-items-center p-0">
         <DateField date={hotel.date} />
         {detailPage && (
           <Button onClick={onShowReview}>
-            <span style={{ marginRight: "0.5rem" }}>
+            <span style={{ marginRight: "1rem" }}>
               {showComments ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
             </span>
             Show reviews

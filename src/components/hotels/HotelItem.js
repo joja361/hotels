@@ -1,10 +1,10 @@
 import Image from "../UI/Image";
 import HotelDetails from "./HotelDetails";
 import CommentList from "../comments/CommentList";
-import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import { useState } from "react";
 
 const HotelItem = ({ hotel, detailPage = true }) => {
   const [showComments, setShowComments] = useState(false);

@@ -9,15 +9,9 @@ const Rating = ({ rating = null, hotelId }) => {
 
   const handleRating = async (rate) => {
     try {
-      await axios.post(
-        `http://localhost:8080/api/hotel/${hotelId}/rating`,
-        {
-          rating: rate,
-        },
-        {
-          headers: { Authenticatin: `Bearer ${token}` },
-        }
-      );
+      await axios.post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
+        rating: rate,
+      });
       dispatch(changeRating({ hotelId, rate }));
     } catch (err) {
       console.log("Something went wrong");
