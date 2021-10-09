@@ -1,159 +1,65 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import {
-  isConfirmPasswordValid,
-  isEmailValid,
-  isPasswordValid,
-} from "../../lib/lib";
 import axios from "axios";
+import { Formik, Form } from "formik";
+import InputField from "./InputField";
+import * as Yup from "yup";
 
 const SignUp = () => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
-  const [isEnteredEmailInvalid, setIsEnteredEmailInvalid] = useState({
-    isInvalid: null,
-    errorMessage: "",
-  });
-  const [isEnteredPasswordInvalid, setIsEnteredPasswordInvalid] = useState({
-    isInvalid: null,
-    errorMessage: "",
-  });
-  const [isEnteredConfirmPasswordInvalid, setIsEnteredConfirmPasswordInvalid] =
-    useState({
-      isInvalid: null,
-      errorMessage: "",
-    });
-
   const history = useHistory();
 
-  const handleEmailChange = (event) => {
-    setEnteredEmail(event.target.value);
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    address: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
   };
 
-  const handleChangePassword = (event) => {
-    setEnteredPassword(event.target.value);
-  };
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    address: Yup.string().required("Required"),
+    email: Yup.string().email("Entered invalid e-mail").required("Required"),
+    password: Yup.string().required("Required").min(8, "Password is too short"),
+    passwordConfirmation: Yup.string()
+      .required("Required")
+      .oneOf([Yup.ref("password"), null], "Password must match"),
+  });
 
-  const handleChangePasswordConfirm = (event) => {
-    setEnteredConfirmPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const emailIsValid = isEmailValid(enteredEmail);
-    const passwordIsValid = isPasswordValid(enteredPassword);
-    const confirmPasswordIsValid = isConfirmPasswordValid(
-      enteredPassword,
-      enteredConfirmPassword
-    );
-
-    const validEnteredValues =
-      emailIsValid && passwordIsValid && confirmPasswordIsValid;
-
-    if (!validEnteredValues) {
-      setIsEnteredEmailInvalid({
-        isInvalid: !emailIsValid,
-        errorMessage: "Entered e-mail can't be empty and must include @",
-      });
-      setIsEnteredPasswordInvalid({
-        isInvalid: !passwordIsValid,
-        errorMessage: "Entered password must contain at least 6 characters",
-      });
-      setIsEnteredConfirmPasswordInvalid({
-        isInvalid: !confirmPasswordIsValid,
-        errorMessage: "Passwords must be equal",
-      });
-      return;
-    }
-
-    axios
-      .post("http://localhost:8080/api/user", {
-        email: enteredEmail,
-        password: enteredPassword,
-      })
-      .then((res) => {
-        setIsEnteredEmailInvalid({
-          isInvalid: false,
-          errorMessage: "",
-        });
-        setIsEnteredPasswordInvalid({
-          isInvalid: false,
-          errorMessage: "",
-        });
-        setIsEnteredConfirmPasswordInvalid({
-          isInvalid: false,
-          errorMessage: "",
-        });
-        history.replace("/signin");
-      });
+  const onSubmit = async (values) => {
+    console.log(values);
+    await axios
+      .post("http://localhost:8080/api/user", values)
+      .then(history.replace("./signin"));
   };
 
   return (
-    <Form
-      className="mx-auto"
-      onSubmit={handleSubmit}
-      style={{ maxWidth: 400, marginTop: `10rem` }}
-      noValidate
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
     >
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <InputGroup hasValidation>
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            value={enteredEmail}
-            onChange={handleEmailChange}
-            isInvalid={isEnteredEmailInvalid.isInvalid}
-          />
-          <Form.Control.Feedback type="invalid">
-            {isEnteredEmailInvalid.errorMessage}
-          </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formPassword">
-        <Form.Label>Password</Form.Label>
-        <InputGroup hasValidation>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={enteredPassword}
-            onChange={handleChangePassword}
-            isInvalid={isEnteredPasswordInvalid.isInvalid}
-          />
-          <Form.Control.Feedback type="invalid">
-            {isEnteredPasswordInvalid.errorMessage}
-          </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formConfirm">
-        <Form.Label>Confirm</Form.Label>
-        <InputGroup hasValidation>
-          <Form.Control
-            type="password"
-            placeholder="Confirm password"
-            value={enteredConfirmPassword}
-            onChange={handleChangePasswordConfirm}
-            isInvalid={isEnteredConfirmPasswordInvalid.isInvalid}
-          />
-          <Form.Control.Feedback type="invalid">
-            {isEnteredConfirmPasswordInvalid.errorMessage}
-          </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
-      <Link className="d-block mb-2" to="/signin">
-        Sign in
-      </Link>
-      <div className="d-grid">
-        <Button variant="primary" type="submit">
-          Sign Up
+      <Form className="container vh-100 d-flex flex-column justify-content-center align-items-center">
+        <InputField label="First Name" name="firstName" />
+        <InputField label="Last Name" name="lastName" />
+        <InputField label="Address" name="address" />
+        <InputField label="Email" type="email" name="email" />
+        <InputField label="Password" type="password" name="password" />
+        <InputField
+          label="Confirm Password"
+          type="password"
+          name="passwordConfirmation"
+        />
+        <Link className="d-block mb-2" to="/signin">
+          Sign in
+        </Link>
+        <Button variant="primary" type="submit" className="w-50">
+          Sign in
         </Button>
-      </div>
-    </Form>
+      </Form>
+    </Formik>
   );
 };
 
