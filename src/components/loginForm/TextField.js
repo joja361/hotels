@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import { Field, ErrorMessage } from "formik";
 import { Col, InputGroup } from "react-bootstrap";
 
-const InputField = ({ label, name, type, ...rest }) => {
+const TextField = ({ label, name, type, ...rest }) => {
   return (
     <Form.Group as={Col}>
       <Form.Label htmlFor={name}>{label}</Form.Label>
@@ -11,6 +11,7 @@ const InputField = ({ label, name, type, ...rest }) => {
           {({ field, meta }) => {
             return (
               <Form.Control
+                as="textarea"
                 type={type}
                 isInvalid={meta.error && meta.touched}
                 {...field}
@@ -33,4 +34,4 @@ const InputField = ({ label, name, type, ...rest }) => {
   );
 };
 
-export default InputField;
+export default TextField;

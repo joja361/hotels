@@ -1,11 +1,13 @@
-import { Link, useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
-import { baseUrl, login } from "../../store/authSlice";
 import InputField from "./InputField";
-import { Formik, Form } from "formik";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import * as Yup from "yup";
 import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { baseUrl, login } from "../../store/authSlice";
+import { Formik } from "formik";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -40,20 +42,21 @@ const SignIn = () => {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      <Form
-        className="container vh-100 d-flex flex-column align-items-center"
-        style={{ marginTop: "20vh" }}
-      >
-        <InputField label="Email" name="email" />
-        <InputField label="Password" type="password" name="password" />
-        {failToLogin && <div style={{ color: "red" }}>{failToLogin}</div>}
-        <Link className="d-block mb-2 w-50" to="/signup">
-          Sing Up
-        </Link>
-        <Button variant="primary" type="submit" className="w-50">
-          Sign in
-        </Button>
-      </Form>
+      {({ handleSubmit }) => (
+        <Container style={{ maxWidth: 300 }}>
+          <Form style={{ marginTop: "20vh" }} onSubmit={handleSubmit}>
+            <InputField label="Email" name="email" />
+            <InputField label="Password" type="password" name="password" />
+            {failToLogin && <div style={{ color: "red" }}>{failToLogin}</div>}
+            <Link className="d-block mb-2 w-50" to="/signup">
+              Sing Up
+            </Link>
+            <Button variant="primary" type="submit" className="w-100">
+              Sign in
+            </Button>
+          </Form>
+        </Container>
+      )}
     </Formik>
   );
 };
