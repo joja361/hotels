@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import InputField from "./InputField";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
+import Layout from "../layout/Layout";
 import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -20,15 +21,13 @@ const SignIn = () => {
   };
 
   const onSubmit = async (values) => {
-    await baseUrl
-      .post("/auth/login", values)
-      .then((res) => {
-        dispatch(login({ email: values.email, id: res.data.token }));
-        history.replace("/dashboard");
-      })
-      .catch(() =>
-        setFailToLogin("You entered wrong credentials, please try again")
-      );
+    try {
+      let res = await baseUrl.post("/auth/login", values);
+      dispatch(login({ email: values.email, id: res.data.token }));
+      history.push("/dashboard"); // do I need to use history.push here instead of history.replace since it's login form
+    } catch {
+      setFailToLogin("You entered wrong credentials, please try again");
+    }
   };
 
   const validationSchema = Yup.object({
@@ -43,19 +42,21 @@ const SignIn = () => {
       validationSchema={validationSchema}
     >
       {({ handleSubmit }) => (
-        <Container style={{ maxWidth: 300 }}>
-          <Form style={{ marginTop: "20vh" }} onSubmit={handleSubmit}>
-            <InputField label="Email" name="email" />
-            <InputField label="Password" type="password" name="password" />
-            {failToLogin && <div style={{ color: "red" }}>{failToLogin}</div>}
-            <Link className="d-block mb-2 w-50" to="/signup">
-              Sing Up
-            </Link>
-            <Button variant="primary" type="submit" className="w-100">
-              Sign in
-            </Button>
-          </Form>
-        </Container>
+        <Layout>
+          <Container style={{ maxWidth: 300 }}>
+            <Form style={{ marginTop: "20vh" }} onSubmit={handleSubmit}>
+              <InputField label="Email" name="email" />
+              <InputField label="Password" type="password" name="password" />
+              {failToLogin && <div style={{ color: "red" }}>{failToLogin}</div>}
+              <Link className="d-block mb-2 w-50" to="/signup">
+                Sing Up
+              </Link>
+              <Button variant="primary" type="submit" className="w-100">
+                Sign in
+              </Button>
+            </Form>
+          </Container>
+        </Layout>
       )}
     </Formik>
   );

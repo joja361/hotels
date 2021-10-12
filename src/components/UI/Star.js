@@ -1,9 +1,9 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import classes from "./Star.module.css";
 
-const Star = ({ full = false, id, onRating }) => {
+const Star = ({ full = false, id, onRating, hotelId }) => {
   const handleClick = () => {
-    onRating(id);
+    onRating(id, hotelId);
   };
 
   const star = full ? (

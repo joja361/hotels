@@ -21,8 +21,7 @@ function App() {
         <SignUp />
       </Route>
       <Route path="/dashboard" exact>
-        {isLoggedIn && <DashBoard />}
-        {!isLoggedIn && <Redirect to="/" />}
+        <DashBoard />
       </Route>
       <Route path="/dashboard/:id">
         {isLoggedIn && <HotelDetail />}

@@ -67,21 +67,23 @@ export const { changeRating, changeLike } = hotelsSlice.actions;
 export const fetchHotelData = () => {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    await authAxios
-      .get("/hotel")
-      .then(({ data }) => dispatch(getData({ data, error: "" })))
-      .catch((err) => {
-        dispatch(setError(err.message));
-      });
+    try {
+      let { data } = await authAxios.get("/hotel");
+      dispatch(getData({ data, error: "" }));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
     dispatch(setLoading(false));
   };
 };
 
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
-    await authAxios
-      .get(`/hotel/${id}`)
-      .then(({ data }) => dispatch(hotelsSlice.actions.getHotelDetail(data)))
-      .catch((err) => console.log(err.message));
+    try {
+      let { data } = await authAxios.get(`/hotel/${id}`);
+      dispatch(hotelsSlice.actions.getHotelDetail(data));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };

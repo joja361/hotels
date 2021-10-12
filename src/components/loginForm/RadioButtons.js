@@ -11,7 +11,6 @@ const RadioButtons = ({ label, name, options, ...rest }) => {
         </Form.Label>
         <Field name={name} {...rest}>
           {({ field, form }) => {
-            console.log(form);
             return options.map((option) => {
               return (
                 <Form.Check
