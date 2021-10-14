@@ -1,36 +1,22 @@
-import { useSelector } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
 import SignIn from "./components/loginForm/SignIn";
 import SignUp from "./components/loginForm/SignUp";
 import DashBoard from "./pages/DashBoard";
 import Favorites from "./pages/Favorites";
 import HotelDetail from "./pages/HotelDetail";
+import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
-
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route exact path="/">
         <Redirect to="/signin" />
       </Route>
-      <Route path="/signin">
-        <SignIn />
-      </Route>
-      <Route path="/signup">
-        <SignUp />
-      </Route>
-      <Route path="/dashboard" exact>
-        <DashBoard />
-      </Route>
-      <Route path="/dashboard/:id">
-        {isLoggedIn && <HotelDetail />}
-        {!isLoggedIn && <Redirect to="/" />}
-      </Route>
-      <Route path="/favorites" exact>
-        {isLoggedIn && <Favorites />}
-        {!isLoggedIn && <Redirect to="/" />}
-      </Route>
+      <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/dashboard" component={DashBoard} />
+      <ProtectedRoute exact path="/dashboard/:id" component={HotelDetail} />
+      <ProtectedRoute exact path="/favorites" component={Favorites} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
