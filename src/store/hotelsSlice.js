@@ -13,8 +13,9 @@ const hotelsSlice = createSlice({
   initialState: initialState,
   reducers: {
     getData(state, action) {
-      state.hotels = action.payload.data;
-      state.error = action.payload.error;
+      const { data, error } = action.payload;
+      state.hotels = data;
+      state.error = error;
     },
     setError(state, action) {
       state.error = action.payload;
@@ -22,7 +23,6 @@ const hotelsSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
-
     getHotelDetail(state, action) {
       state.hotelDetail = action.payload;
     },

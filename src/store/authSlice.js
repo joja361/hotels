@@ -26,12 +26,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      localStorage.setItem("token", action.payload.id);
-      localStorage.setItem("email", action.payload.email);
+      const { id, email } = action.payload;
+      localStorage.setItem("token", id);
+      localStorage.setItem("email", email);
       return {
-        token: action.payload.id,
+        token: id,
         isLoggedIn: true,
-        username: action.payload.email,
+        username: email,
       };
     },
     logout() {
