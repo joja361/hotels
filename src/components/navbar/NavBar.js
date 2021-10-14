@@ -34,13 +34,17 @@ const NavBar = () => {
     </Link>
   ) : null;
 
+  const favorites = isLoggedIn && (
+    <NavLink className="ps-3" to="favorites">
+      Favorites
+    </NavLink>
+  );
+
   return (
     <Navbar className="d-flex justify-content-between bg-light p-3">
       <div>
         <NavLink to="/dashboard">Dashboard</NavLink>
-        <NavLink className="ps-3" to="favorites">
-          Favorites
-        </NavLink>
+        {favorites}
       </div>
       <div className="d-flex">
         {userWhoIsLogged}
