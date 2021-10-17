@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const token = localStorage.getItem("token");
-const username = localStorage.getItem("email");
 
 export const baseUrl = axios.create({
   baseURL: "http://localhost:8080/api",
@@ -16,9 +16,9 @@ export const authAxios = axios.create({
 });
 
 const initialState = {
-  token: token,
-  isLoggedIn: !!token,
-  username,
+  token,
+  username: "",
+  role: "",
 };
 
 const authSlice = createSlice({
@@ -26,23 +26,24 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      const { id, email } = action.payload;
-      localStorage.setItem("token", id);
-      localStorage.setItem("email", email);
+      const { token } = action.payload;
+      const decoded = jwt_decode(token);
+      localStorage.setItem("token", token);
       return {
-        token: id,
-        isLoggedIn: true,
-        username: email,
+        token,
+        username: decoded.email,
+        role: decoded.role,
       };
     },
     logout() {
       localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      return { token: null, isLoggedIn: false, username: "" };
+      return { token: null, username: "", role: "" };
     },
   },
 });
 
 export default authSlice;
+
+export const roleOfUser = (store) => store.auth.role;
 
 export const { login, logout } = authSlice.actions;

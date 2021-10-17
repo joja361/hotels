@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { changeRating, changeLike } from "../../store/hotelsSlice";
-import { baseUrl } from "../../store/authSlice";
+import { baseUrl, roleOfUser } from "../../store/authSlice";
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
 const Header = ({ name, city, rating, like, id, detailPage }) => {
@@ -12,10 +12,10 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+  const role = useSelector(roleOfUser);
 
   const handleRating = async (rate, hotelId) => {
-    if (isLoggedIn) {
+    if (role) {
       try {
         await baseUrl.post(`/hotel/${hotelId}/rating`, {
           rating: rate,
@@ -30,7 +30,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   };
 
   const handleLike = async () => {
-    if (isLoggedIn) {
+    if (role) {
       try {
         await baseUrl.post(`/hotel/${id}/favorite`);
         dispatch(changeLike({ hotelId: id, like: !like }));
@@ -56,7 +56,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   return (
     <Container className="d-flex justify-content-between align-items-center mb-2 p-0">
       <div>
-        {detailPage && isLoggedIn ? (
+        {detailPage && role ? (
           link
         ) : (
           <Card.Title className="display-6">{name}</Card.Title>

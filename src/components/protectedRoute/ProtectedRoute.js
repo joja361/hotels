@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import { roleOfUser } from "../../store/authSlice";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector(roleOfUser);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
+        role ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

@@ -23,7 +23,7 @@ const SignIn = () => {
   const onSubmit = async (values) => {
     try {
       let res = await baseUrl.post("/auth/login", values);
-      dispatch(login({ email: values.email, id: res.data.token }));
+      dispatch(login({ token: res.data.token }));
       history.push("/dashboard"); // do I need to use history.push here instead of history.replace since it's login form
     } catch {
       setFailToLogin("You entered wrong credentials, please try again");
