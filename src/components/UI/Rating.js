@@ -1,6 +1,6 @@
 import Star from "./Star";
 
-const Rating = ({ rating = null, onRating, hotelId }) => {
+const Rating = ({ rating = null, onRating, hotelId, disabled }) => {
   let stars = [];
 
   for (let i = 1; i < 6; i++) {
@@ -14,6 +14,7 @@ const Rating = ({ rating = null, onRating, hotelId }) => {
       onRating={onRating}
       id={i + 1}
       hotelId={hotelId}
+      disabled={disabled}
     />
   ));
 

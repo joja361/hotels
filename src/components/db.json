@@ -1,0 +1,86 @@
+{
+  "users": [
+    {
+      "email": "test@mail.com",
+      "password": "strongPassword",
+      "id": "9a0af03a-d0e0-44d1-8ffd-676d7afc869b"
+    },
+    {
+      "email": "erool89@hotmail.com",
+      "password": "asdasd",
+      "id": "1b9f20eb-025a-4994-b5e6-0230edfde0e8"
+    }
+  ],
+  "hotels": [
+    {
+      "name": "Hotel 1",
+      "city": "Sarajevo",
+      "description": "Hotel Holiday je projektirao proslavljeni bosanski arhitekt Ivan Štraus u periodu 1982-1983 te je isti otvoren za XIV Zimske olimpijske igre Sarajevo 1984. godine i od tada je, kao svjedok novije historije Bosne i Hercegovine, postao nezaobilazno mjesto za poslovne putnike i turiste.",
+      "price": 500,
+      "img": "https://images.unsplash.com/photo-1524234599372-a5bd0194758d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+      "id": "2f28e5dc-41e0-4371-9c17-e9e2cf2a8264",
+      "like": true,
+      "date": "21/06/2017",
+      "comments": [
+        {
+          "name": "Namik",
+          "lastName": "Hamid",
+          "like": true,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+        },
+        {
+          "name": "Jeff",
+          "lastName": "Bezos",
+          "like": false,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1606663889134-b1dedb5ed8b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+        },
+        {
+          "name": "Mack",
+          "lastName": "Bajraktarevic",
+          "like": false,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+        }
+      ],
+      "rating": 3,
+      "favorite": false
+    },
+    {
+      "name": "Hotel 2",
+      "city": "Mostar",
+      "description": "Some random",
+      "price": 500,
+      "img": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+      "id": "e58c87a4-0660-414b-87c7-beacddce8187",
+      "like": true,
+      "date": "21/06/2017",
+      "comments": [
+        {
+          "name": "Name",
+          "lastName": "LastName",
+          "like": true,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1533518463841-d62e1fc91373?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+        },
+        {
+          "name": "Name",
+          "lastName": "LastName",
+          "like": false,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1501432377862-3d0432b87a14?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+        },
+        {
+          "name": "Name",
+          "lastName": "LastName",
+          "like": false,
+          "comment": "This was very nice experience. Service is very good. All the best recommendations for the hotel.",
+          "avatar": "https://images.unsplash.com/photo-1598624669976-9660296b0419?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1062&q=80"
+        }
+      ],
+      "rating": 4,
+      "favorite": false
+    }
+  ]
+}

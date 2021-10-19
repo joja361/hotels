@@ -5,6 +5,7 @@ import Favorites from "./pages/Favorites";
 import HotelDetail from "./pages/HotelDetail";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 import { Switch, Route, Redirect } from "react-router-dom";
+import AddHotel from "./pages/AddHotel";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/dashboard" component={DashBoard} />
+      <Route exact path="/admin/dashboard" component={DashBoard} />
+      <Route exact path="/admin/addhotel" component={AddHotel} />
       <ProtectedRoute exact path="/dashboard/:id" component={HotelDetail} />
       <ProtectedRoute exact path="/favorites" component={Favorites} />
       <Route path="*">

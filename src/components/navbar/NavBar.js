@@ -34,7 +34,7 @@ const NavBar = () => {
     </Link>
   ) : null;
 
-  const favorites = role && (
+  const favorites = role === "user" && (
     <NavLink className="ps-3" to="favorites">
       Favorites
     </NavLink>

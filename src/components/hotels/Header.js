@@ -14,8 +14,10 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
 
   const role = useSelector(roleOfUser);
 
+  const IsUserAdmin = role === "admin";
+
   const handleRating = async (rate, hotelId) => {
-    if (role) {
+    if (role === "user") {
       try {
         await baseUrl.post(`/hotel/${hotelId}/rating`, {
           rating: rate,
@@ -30,7 +32,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   };
 
   const handleLike = async () => {
-    if (role) {
+    if (role === "user") {
       try {
         await baseUrl.post(`/hotel/${id}/favorite`);
         dispatch(changeLike({ hotelId: id, like: !like }));
@@ -63,8 +65,18 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
         )}
         <p className="text-muted mb-0">{city}</p>
       </div>
-      <Like like={like} hotelId={id} onLike={handleLike} />
-      <Rating rating={rating} hotelId={id} onRating={handleRating} />
+      <Like
+        like={like}
+        hotelId={id}
+        onLike={handleLike}
+        disabled={IsUserAdmin}
+      />
+      <Rating
+        rating={rating}
+        hotelId={id}
+        onRating={handleRating}
+        disabled={IsUserAdmin}
+      />
     </Container>
   );
 };

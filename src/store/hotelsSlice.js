@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authAxios } from "./authSlice";
+import { authAxios, baseUrl } from "./authSlice";
 
 const initialState = {
   hotels: [],
@@ -26,7 +26,9 @@ const hotelsSlice = createSlice({
     getHotelDetail(state, action) {
       state.hotelDetail = action.payload;
     },
-
+    addHotel(state, action) {
+      state.hotels.push(action.payload);
+    },
     changeRating(state, action) {
       const index = state.hotels.findIndex(
         (item) => item.id === action.payload.hotelId
@@ -41,7 +43,6 @@ const hotelsSlice = createSlice({
         hotelDetail: { ...state.hotelDetail, rating: action.payload.rate },
       };
     },
-
     changeLike(state, action) {
       const index = state.hotels.findIndex(
         (item) => item.id === action.payload.hotelId
@@ -61,7 +62,8 @@ const hotelsSlice = createSlice({
 });
 
 export default hotelsSlice;
-const { getData, setLoading, setError } = hotelsSlice.actions;
+const { getData, setLoading, setError, addHotel, getHotelDetail } =
+  hotelsSlice.actions;
 export const { changeRating, changeLike } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {
@@ -81,9 +83,20 @@ export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
     try {
       let { data } = await authAxios.get(`/hotel/${id}`);
-      dispatch(hotelsSlice.actions.getHotelDetail(data));
+      dispatch(getHotelDetail(data));
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const addNewHotel = (values) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await baseUrl.post("/hotel", values);
+      dispatch(addHotel(data));
+    } catch (err) {
+      console.log("Something went wrong!");
     }
   };
 };

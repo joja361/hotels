@@ -9,6 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { baseUrl, login } from "../../store/authSlice";
 import { Formik } from "formik";
+import jwt_decode from "jwt-decode";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,13 @@ const SignIn = () => {
   const onSubmit = async (values) => {
     try {
       let res = await baseUrl.post("/auth/login", values);
-      dispatch(login({ token: res.data.token }));
-      history.push("/dashboard"); // do I need to use history.push here instead of history.replace since it's login form
+      const token = res.data.token;
+      const decoded = jwt_decode(token);
+      const { email, role } = decoded;
+      dispatch(login({ token, email, role }));
+      role === "user"
+        ? history.push("/dashboard")
+        : history.push("admin/dashboard");
     } catch {
       setFailToLogin("You entered wrong credentials, please try again");
     }

@@ -3,9 +3,18 @@
   padding-left: 1.4em;
 }
 
-.heart {
-  color: red;
+.heart,
+.disabled {
   width: 2.2em;
   height: 2.2em;
+}
+
+.heart {
+  color: red;
   cursor: pointer;
+}
+
+.disabled {
+  color: gray;
+  pointer-events: none;
 }
