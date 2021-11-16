@@ -1,10 +1,10 @@
 import Like from "../UI/Like";
 import Rating from "../UI/Rating";
-import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
+import axios from "axios";
+import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeRating, changeLike } from "../../store/hotelsSlice";
-import { baseUrl, roleOfUser } from "../../store/authSlice";
+import { userRole } from "../../store/authSlice";
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
 const Header = ({ name, city, rating, like, id, detailPage }) => {
@@ -12,14 +12,14 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const role = useSelector(roleOfUser);
+  const role = useSelector(userRole);
 
   const IsUserAdmin = role === "admin";
 
   const handleRating = async (rate, hotelId) => {
     if (role === "user") {
       try {
-        await baseUrl.post(`/hotel/${hotelId}/rating`, {
+        await axios.post(`http://localhost:8080/api/hotel/${hotelId}/rating`, {
           rating: rate,
         });
         dispatch(changeRating({ hotelId, rate }));
@@ -34,7 +34,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   const handleLike = async () => {
     if (role === "user") {
       try {
-        await baseUrl.post(`/hotel/${id}/favorite`);
+        await axios.post(`http://localhost:8080/api/hotel/${id}/favorite`);
         dispatch(changeLike({ hotelId: id, like: !like }));
       } catch (err) {
         console.log("Something went wrong");

@@ -8,8 +8,8 @@ import Layout from "../layout/Layout";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
-import { baseUrl } from "../../store/authSlice";
 import TextField from "./TextField";
+import axios from "axios";
 
 const SignUp = () => {
   const history = useHistory();
@@ -42,7 +42,7 @@ const SignUp = () => {
 
   const onSubmit = async (values) => {
     try {
-      await baseUrl.post("/user", values);
+      await axios.post("http://localhost:8080/api/user", values);
       history.replace("./signin");
     } catch (error) {
       console.log(error);

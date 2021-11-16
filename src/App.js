@@ -16,8 +16,8 @@ function App() {
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/dashboard" component={DashBoard} />
-      <Route exact path="/admin/dashboard" component={DashBoard} />
-      <Route exact path="/admin/addhotel" component={AddHotel} />
+      <ProtectedRoute exact path="/admin/dashboard" component={DashBoard} />
+      <ProtectedRoute exact path="/admin/addhotel" component={AddHotel} />
       <ProtectedRoute exact path="/dashboard/:id" component={HotelDetail} />
       <ProtectedRoute exact path="/favorites" component={Favorites} />
       <Route path="*">

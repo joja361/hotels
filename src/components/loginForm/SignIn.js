@@ -7,9 +7,10 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { baseUrl, login } from "../../store/authSlice";
+import { login } from "../../store/authSlice";
 import { Formik } from "formik";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -23,14 +24,15 @@ const SignIn = () => {
 
   const onSubmit = async (values) => {
     try {
-      let res = await baseUrl.post("/auth/login", values);
+      let res = await axios.post(
+        "http://localhost:8080/api/auth/login",
+        values
+      );
       const token = res.data.token;
       const decoded = jwt_decode(token);
       const { email, role } = decoded;
       dispatch(login({ token, email, role }));
-      role === "user"
-        ? history.push("/dashboard")
-        : history.push("admin/dashboard");
+      history.push(role === "user" ? "/dashboard" : "admin/dashboard");
     } catch {
       setFailToLogin("You entered wrong credentials, please try again");
     }

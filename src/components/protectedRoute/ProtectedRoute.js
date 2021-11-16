@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import { roleOfUser } from "../../store/authSlice";
+import { userRole } from "../../store/authSlice";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const role = useSelector(roleOfUser);
+  const role = useSelector(userRole);
 
   return (
     <Route

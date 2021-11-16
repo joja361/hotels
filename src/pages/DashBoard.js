@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHotelData } from "../store/hotelsSlice";
 import { Container } from "react-bootstrap";
 import { useEffect } from "react";
-import { roleOfUser } from "../store/authSlice";
+import { userRole } from "../store/authSlice";
 import { Link } from "react-router-dom";
 
 const DashBoard = () => {
@@ -13,7 +13,7 @@ const DashBoard = () => {
   const hotels = useSelector((state) => state.hotel.hotels);
   const error = useSelector((state) => state.hotel.error);
   const isLoading = useSelector((state) => state.hotel.loading);
-  const role = useSelector(roleOfUser);
+  const role = useSelector(userRole);
 
   const addButton = role === "admin" && (
     <Link

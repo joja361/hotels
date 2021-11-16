@@ -1,6 +1,5 @@
 import { Formik } from "formik";
-import { Container } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { Container, Form } from "react-bootstrap";
 import InputField from "../loginForm/InputField";
 import TextField from "../loginForm/TextField";
 import * as Yup from "yup";

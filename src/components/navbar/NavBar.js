@@ -3,16 +3,14 @@ import Button from "react-bootstrap/Button";
 import { NavLink, useHistory, Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, roleOfUser } from "../../store/authSlice";
-import { useLocation } from "react-router";
+import { logout, userRole } from "../../store/authSlice";
 
 const NavBar = () => {
   const username = useSelector((store) => store.auth.username);
-  const role = useSelector(roleOfUser);
+  const role = useSelector(userRole);
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { pathname } = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -26,13 +24,13 @@ const NavBar = () => {
     </div>
   );
 
-  const SignInOrSignOutButton = role ? (
-    <Button onClick={handleLogout}>Sign out</Button>
-  ) : pathname !== "/signin" ? (
+  const signInButton = (
     <Link to="/" className="btn btn-primary">
       Sign in
     </Link>
-  ) : null;
+  );
+
+  const signOutButton = <Button onClick={handleLogout}>Sign out</Button>;
 
   const favorites = role === "user" && (
     <NavLink className="ps-3" to="favorites">
@@ -48,7 +46,7 @@ const NavBar = () => {
       </div>
       <div className="d-flex">
         {userWhoIsLogged}
-        {SignInOrSignOutButton}
+        {role ? signOutButton : signInButton}
       </div>
     </Navbar>
   );

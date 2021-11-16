@@ -5,9 +5,6 @@ const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 const role = localStorage.getItem("role");
 
-export const baseUrl = axios.create({
-  baseURL: "http://localhost:8080/api",
-});
 
 export const authAxios = axios.create({
   baseURL: "http://localhost:8080/api",
@@ -48,6 +45,6 @@ const authSlice = createSlice({
 
 export default authSlice;
 
-export const roleOfUser = (store) => store.auth.role;
+export const userRole = (store) => store.auth.role;
 
 export const { login, logout } = authSlice.actions;
