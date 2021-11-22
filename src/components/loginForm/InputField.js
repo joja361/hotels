@@ -1,6 +1,5 @@
-import Form from "react-bootstrap/Form";
 import { Field, ErrorMessage } from "formik";
-import { Col, InputGroup, Row } from "react-bootstrap";
+import { Col, InputGroup, Row, Form } from "react-bootstrap";
 
 const InputField = ({ label, name, type, inline, ...rest }) => {
   const inputGroup = (

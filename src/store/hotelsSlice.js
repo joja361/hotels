@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authAxios } from "./authSlice";
+import { authAxios, mainAxios } from "./authSlice";
 import axios from "axios";
 
 const initialState = {
@@ -94,10 +94,7 @@ export const fetchHotelDetail = (id) => {
 export const addNewHotel = (values) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8080/api/hotel",
-        values
-      );
+      const { data } = await mainAxios.post("/hotel", values);
       dispatch(addHotel(data));
     } catch (err) {
       console.log("Something went wrong!");

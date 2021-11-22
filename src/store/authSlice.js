@@ -5,6 +5,9 @@ const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 const role = localStorage.getItem("role");
 
+export const mainAxios = axios.create({
+  baseURL: "http://localhost:8080/api",
+});
 
 export const authAxios = axios.create({
   baseURL: "http://localhost:8080/api",

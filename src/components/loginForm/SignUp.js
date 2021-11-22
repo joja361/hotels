@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import TextField from "./TextField";
-import axios from "axios";
+import { mainAxios } from "../../store/authSlice";
 
 const SignUp = () => {
   const history = useHistory();
@@ -42,7 +42,7 @@ const SignUp = () => {
 
   const onSubmit = async (values) => {
     try {
-      await axios.post("http://localhost:8080/api/user", values);
+      await mainAxios.post("/user", values);
       history.replace("./signin");
     } catch (error) {
       console.log(error);

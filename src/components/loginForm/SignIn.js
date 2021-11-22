@@ -7,10 +7,9 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/authSlice";
+import { login, mainAxios } from "../../store/authSlice";
 import { Formik } from "formik";
 import jwt_decode from "jwt-decode";
-import axios from "axios";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -24,10 +23,7 @@ const SignIn = () => {
 
   const onSubmit = async (values) => {
     try {
-      let res = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        values
-      );
+      let res = await mainAxios.post("/auth/login", values);
       const token = res.data.token;
       const decoded = jwt_decode(token);
       const { email, role } = decoded;
