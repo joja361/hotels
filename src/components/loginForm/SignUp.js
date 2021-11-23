@@ -4,11 +4,12 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import RadioButtons from "./RadioButtons";
+import Layout from "../layout/Layout";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
-import { baseUrl } from "../../store/authSlice";
 import TextField from "./TextField";
+import { mainAxios } from "../../store/authSlice";
 
 const SignUp = () => {
   const history = useHistory();
@@ -40,8 +41,12 @@ const SignUp = () => {
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
-    await baseUrl.post("/user", values).then(history.replace("./signin"));
+    try {
+      await mainAxios.post("/user", values);
+      history.replace("./signin");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -51,44 +56,46 @@ const SignUp = () => {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <Container style={{ maxWidth: 400 }}>
-          <Form onSubmit={handleSubmit} style={{ marginTop: "20vh" }}>
-            <Row className="mb-2">
-              <InputField label="First Name" name="firstName" />
-              <InputField label="Last Name" name="lastName" />
-            </Row>
-            <InputField label="Address" name="address" className="mb-2" />
-            <Row className="my-3">
-              <RadioButtons label="Gender" name="gender" options={gender} />
-            </Row>
-            <TextField
-              label="Description"
-              name="description"
-              type="textarea"
-              className="mb-2"
-            />
-            <InputField
-              label="Email"
-              type="email"
-              name="email"
-              className="mb-2"
-            />
-            <Row className="mb-2">
-              <InputField label="Password" type="password" name="password" />
-              <InputField
-                label="Confirm Password"
-                type="password"
-                name="passwordConfirmation"
+        <Layout>
+          <Container style={{ maxWidth: 400 }}>
+            <Form onSubmit={handleSubmit} style={{ marginTop: "8vh" }}>
+              <Row className="mb-2">
+                <InputField label="First Name" name="firstName" />
+                <InputField label="Last Name" name="lastName" />
+              </Row>
+              <InputField label="Address" name="address" className="mb-2" />
+              <Row className="my-3">
+                <RadioButtons label="Gender" name="gender" options={gender} />
+              </Row>
+              <TextField
+                label="Description"
+                name="description"
+                type="textarea"
+                className="mb-2"
               />
-            </Row>
-            <Link className="d-block mb-2 w-50" to="/signin">
-              Sign in
-            </Link>
-            <Button variant="primary" type="submit" className="w-100">
-              Sign in
-            </Button>
-          </Form>
-        </Container>
+              <InputField
+                label="Email"
+                type="email"
+                name="email"
+                className="mb-2"
+              />
+              <Row className="mb-2">
+                <InputField label="Password" type="password" name="password" />
+                <InputField
+                  label="Confirm Password"
+                  type="password"
+                  name="passwordConfirmation"
+                />
+              </Row>
+              <Link className="d-block mb-2 w-50" to="/signin">
+                Sign in
+              </Link>
+              <Button variant="primary" type="submit" className="w-100">
+                Sign up
+              </Button>
+            </Form>
+          </Container>
+        </Layout>
       )}
     </Formik>
   );

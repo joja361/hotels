@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authAxios } from "./authSlice";
+import { authAxios, mainAxios } from "./authSlice";
+import axios from "axios";
 
 const initialState = {
   hotels: [],
@@ -13,8 +14,9 @@ const hotelsSlice = createSlice({
   initialState: initialState,
   reducers: {
     getData(state, action) {
-      state.hotels = action.payload.data;
-      state.error = action.payload.error;
+      const { data, error } = action.payload;
+      state.hotels = data;
+      state.error = error;
     },
     setError(state, action) {
       state.error = action.payload;
@@ -22,11 +24,12 @@ const hotelsSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
-
     getHotelDetail(state, action) {
       state.hotelDetail = action.payload;
     },
-
+    addHotel(state, action) {
+      state.hotels.push(action.payload);
+    },
     changeRating(state, action) {
       const index = state.hotels.findIndex(
         (item) => item.id === action.payload.hotelId
@@ -41,7 +44,6 @@ const hotelsSlice = createSlice({
         hotelDetail: { ...state.hotelDetail, rating: action.payload.rate },
       };
     },
-
     changeLike(state, action) {
       const index = state.hotels.findIndex(
         (item) => item.id === action.payload.hotelId
@@ -61,27 +63,41 @@ const hotelsSlice = createSlice({
 });
 
 export default hotelsSlice;
-const { getData, setLoading, setError } = hotelsSlice.actions;
+const { getData, setLoading, setError, addHotel, getHotelDetail } =
+  hotelsSlice.actions;
 export const { changeRating, changeLike } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    await authAxios
-      .get("/hotel")
-      .then(({ data }) => dispatch(getData({ data, error: "" })))
-      .catch((err) => {
-        dispatch(setError(err.message));
-      });
+    try {
+      let { data } = await authAxios.get("/hotel");
+      dispatch(getData({ data, error: "" }));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
     dispatch(setLoading(false));
   };
 };
 
 export const fetchHotelDetail = (id) => {
   return async (dispatch) => {
-    await authAxios
-      .get(`/hotel/${id}`)
-      .then(({ data }) => dispatch(hotelsSlice.actions.getHotelDetail(data)))
-      .catch((err) => console.log(err.message));
+    try {
+      let { data } = await authAxios.get(`/hotel/${id}`);
+      dispatch(getHotelDetail(data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const addNewHotel = (values) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await mainAxios.post("/hotel", values);
+      dispatch(addHotel(data));
+    } catch (err) {
+      console.log("Something went wrong!");
+    }
   };
 };

@@ -1,32 +1,15 @@
 import classes from "./Like.module.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { changeLike } from "../../store/hotelsSlice";
-import axios from "axios";
 
-const Like = ({ like, hotelId }) => {
-  const dispatch = useDispatch();
-
-  const handleLike = async () => {
-    try {
-      await axios.post(`http://localhost:8080/api/hotel/${hotelId}/favorite`);
-      dispatch(changeLike({ hotelId, like: !like }));
-    } catch (err) {
-      console.log("Something went wrong");
-    }
-  };
-
+const Like = ({ like, onLike, disabled }) => {
+  const enableOrDisable = disabled ? "disabled" : "heart";
   const showLike = like ? (
-    <AiFillHeart className={classes.heart} />
+    <AiFillHeart className={classes[enableOrDisable]} onClick={onLike} />
   ) : (
-    <AiOutlineHeart className={classes.heart} />
+    <AiOutlineHeart className={classes[enableOrDisable]} onClick={onLike} />
   );
 
-  return (
-    <div onClick={handleLike} className={classes.child}>
-      {showLike}
-    </div>
-  );
+  return <div className={classes.child}>{showLike}</div>;
 };
 
 export default Like;

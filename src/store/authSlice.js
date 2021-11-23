@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const token = localStorage.getItem("token");
-const username = localStorage.getItem("email");
+const token = localStorage.getItem("token");
+const username = localStorage.getItem("username");
+const role = localStorage.getItem("role");
 
-export const baseUrl = axios.create({
+export const mainAxios = axios.create({
   baseURL: "http://localhost:8080/api",
 });
 
@@ -16,9 +17,9 @@ export const authAxios = axios.create({
 });
 
 const initialState = {
-  token: token,
-  isLoggedIn: !!token,
+  token,
   username,
+  role,
 };
 
 const authSlice = createSlice({
@@ -26,22 +27,27 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      localStorage.setItem("token", action.payload.id);
-      localStorage.setItem("email", action.payload.email);
+      const { token, email, role } = action.payload;
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", email);
+      localStorage.setItem("role", role);
       return {
-        token: action.payload.id,
-        isLoggedIn: true,
-        username: action.payload.email,
+        token,
+        username: email,
+        role,
       };
     },
     logout() {
       localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      return { token: null, isLoggedIn: false, username: "" };
+      localStorage.removeItem("username");
+      localStorage.removeItem("role");
+      return { token: null, username: "", role: "" };
     },
   },
 });
 
 export default authSlice;
+
+export const userRole = (store) => store.auth.role;
 
 export const { login, logout } = authSlice.actions;
