@@ -1,16 +1,21 @@
-import CircleImage from "../UI/CircleImage";
-import CommentDetails from "./CommentDetails";
-import Row from "react-bootstrap/Row";
+import { Image } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import CommentDetails from "./CommentDetails";
 
 const CommentItem = ({ comment }) => {
   return (
     <>
-      <Row className="mb-3 mx-2">
-        <Col md={2}>
-          <CircleImage image={comment.avatar} />
+      <Row className="mb-2 justify-content-center">
+        <Col xs={2} md={1} className="ps-3 ps-sm-4 ps-md-2">
+          <Image
+            src={comment.avatar}
+            alt="person"
+            roundedCircle
+            className="comment-img"
+          />
         </Col>
-        <Col md={10}>
+        <Col xs={10} md={11}>
           <CommentDetails
             firstName={comment.name}
             lastName={comment.lastName}
