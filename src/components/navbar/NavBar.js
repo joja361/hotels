@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
 import { logout, userRole } from "../../store/authSlice";
+import Avatar from "../UI/Avatar";
 
 const NavBar = () => {
   const username = useSelector((store) => store.auth.username);
@@ -22,7 +23,7 @@ const NavBar = () => {
   const userWhoIsLogged = role && (
     <Nav.Link className="d-flex align-items-center">
       <p className="mb-0 pe-1">{username}</p>
-      <FaUserAlt />
+      <Avatar sizeFor="nav-avatar" />
     </Nav.Link>
   );
 
@@ -35,7 +36,7 @@ const NavBar = () => {
   const signOutButton = <Nav.Link onClick={handleLogout}>Sign out</Nav.Link>;
 
   return (
-    <Navbar className="justify-content-space px-5 py-3" fixed="top">
+    <Navbar className="px-5 " fixed="top">
       <Nav className="me-auto" activeKey={location.pathname}>
         <LinkContainer to="/dashboard">
           <Nav.Link>Dashboard</Nav.Link>
@@ -46,7 +47,7 @@ const NavBar = () => {
           </LinkContainer>
         )}
       </Nav>
-      <Nav activeKey={location.pathname}>
+      <Nav activeKey={location.pathname} className="align-items-center">
         {userWhoIsLogged}
         {role ? signOutButton : signInButton}
       </Nav>

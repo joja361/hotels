@@ -123,8 +123,14 @@ body {
   border-radius: 5px;
 }
 
-.comment-img {
-  width: 3rem;
+.comment-avatar {
+  width: 48px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.nav-avatar {
+  width: 36px;
   aspect-ratio: 1/1;
 }
 
