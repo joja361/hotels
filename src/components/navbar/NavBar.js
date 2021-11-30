@@ -1,6 +1,5 @@
 import { Nav } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
-import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
@@ -36,7 +35,7 @@ const NavBar = () => {
   const signOutButton = <Nav.Link onClick={handleLogout}>Sign out</Nav.Link>;
 
   return (
-    <Navbar className="px-5 " fixed="top">
+    <Navbar className="px-5 main-navbar" sticky="top">
       <Nav className="me-auto" activeKey={location.pathname}>
         <LinkContainer to="/dashboard">
           <Nav.Link>Dashboard</Nav.Link>

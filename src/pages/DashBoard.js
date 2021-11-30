@@ -15,10 +15,7 @@ const DashBoard = () => {
   const role = useSelector(userRole);
 
   const addButton = role === "admin" && (
-    <Link
-      className="btn btn-outline-primary w-25 d-block mx-auto"
-      to="/admin/addhotel"
-    >
+    <Link className="btn btn-primary w-25 d-block mx-auto" to="/admin/addhotel">
       Add New Hotel
     </Link>
   );

@@ -18,9 +18,7 @@ const Favorites = () => {
   return (
     <Layout>
       <Container className="hotels-container">
-        <h1 className="display-5 mt-n4 mb-4 text-center title trirong">
-          Favorites
-        </h1>
+        <h1 className="display-5 mb-4 text-center title trirong">Favorites</h1>
         <HotelsList hotels={favoriteHotels} />
       </Container>
     </Layout>

@@ -17,6 +17,21 @@ body {
   margin-top: 8rem;
 }
 
+// Navbar
+
+.main-navbar {
+  min-height: 4rem;
+}
+
+.sidebar {
+  position: sticky;
+  top: 4rem;
+  z-index: 1000;
+  height: calc(100vh - 4rem);
+  background-color: #f7f7f7;
+  border-right: 1px solid #ececec;
+}
+
 //Font classes
 
 .ovo {
@@ -34,6 +49,8 @@ body {
 .navbar {
   background-color: #ffffff;
   box-shadow: 0 0 0.4rem #dde4dc;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .hotels-container {

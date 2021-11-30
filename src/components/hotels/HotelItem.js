@@ -34,7 +34,7 @@ const HotelItem = ({ hotel }) => {
       </Row>
       {(detailPage && showComments && commentList) ||
         (!detailPage && commentList)}
-      {detailPage && <hr className="mb-4 mx-n5" />}
+      {detailPage && <hr className="mb-4 hr" />}
     </>
   );
 };
