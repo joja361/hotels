@@ -1,11 +1,21 @@
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { userRole } from "../../store/authSlice";
 import DateField from "./DateField";
 import Header from "./Header";
 import HotelPrice from "./HotelPrice";
 
 const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
+  const role = useSelector(userRole);
+
+  const deleteButton = role === "admin" && (
+    <Button variant="outline-danger" className="ms-2 btn-delete shadow-none">
+      Delete
+    </Button>
+  );
+
   return (
     <Row className="h-100 ms-3">
       <Row className="align-content-start">
@@ -37,6 +47,7 @@ const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
                 </span>
                 Show reviews
               </Button>
+              {deleteButton}
             </Col>
           )}
         </Row>

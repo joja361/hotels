@@ -10,17 +10,15 @@ const AddComment = () => {
     comment: "",
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, { resetForm }) => {
     console.log(values);
-    initialValues.comment = "";
+    resetForm();
   };
-
-  TODO: "you need to reset textarea when add comment button is clicked";
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ handleSubmit, handleChange, values }) => (
-        <>
+        <Form onSubmit={handleSubmit}>
           <Row xs={2} className="mb-2 justify-content-center">
             <Col
               xs={1}
@@ -29,22 +27,20 @@ const AddComment = () => {
               <Avatar />
             </Col>
             <Col xs={10}>
-              <Form>
-                <Form.Label>{username}</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  name="comment"
-                  onChange={handleChange}
-                  values={values.comment}
-                />
-              </Form>
+              <Form.Label>{username}</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="comment"
+                onChange={handleChange}
+                value={values.comment}
+              />
             </Col>
           </Row>
           <Row className="justify-content-center">
             <Col sm={11} className="d-flex justify-content-end">
               <Button
-                onClick={handleSubmit}
+                type="submit"
                 className="shadow-none w-auto"
                 disabled={values.comment === ""}
               >
@@ -52,7 +48,7 @@ const AddComment = () => {
               </Button>
             </Col>
           </Row>
-        </>
+        </Form>
       )}
     </Formik>
   );
