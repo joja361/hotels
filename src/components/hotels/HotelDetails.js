@@ -1,9 +1,9 @@
-import Header from "./Header";
-import HotelPrice from "./HotelPrice";
-import DateField from "./DateField";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import DateField from "./DateField";
+import Header from "./Header";
+import HotelPrice from "./HotelPrice";
 
 const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
   return (
@@ -15,15 +15,15 @@ const HotelDetails = ({ hotel, onShowReview, detailPage, showComments }) => {
         like={hotel.like}
         id={hotel.id}
         detailPage={detailPage}
-      /> 
+      />
       <Card.Text className="d-flex flex-grow-1">{hotel.description}</Card.Text>
       <HotelPrice price={hotel.price} />
       <div className="d-flex justify-content-between align-items-center p-0">
         <DateField date={hotel.date} />
         {detailPage && (
           <Button onClick={onShowReview}>
-            <span style={{ marginRight: "1rem" }}>
-              {showComments ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+            <span style={{ marginRight: "0.8rem" }}>
+              {showComments ? <FaChevronUp /> : <FaChevronDown />}
             </span>
             Show reviews
           </Button>
