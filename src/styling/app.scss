@@ -1,0 +1,202 @@
+@import "custom";
+
+@import url("https://fonts.googleapis.com/css2?family=Ovo&family=Roboto&family=Trirong&display=swap");
+
+$ovo: ("Ovo", serif);
+
+$roboto: ("Roboto", sans-serif);
+
+$trirong: ("Trirong", serif);
+
+body {
+  font-family: $roboto;
+  color: $info;
+}
+
+.main {
+  margin-top: 8rem;
+}
+
+// Navbar
+
+.main-navbar {
+  min-height: 4rem;
+}
+
+.sidebar {
+  position: sticky;
+  top: 4rem;
+  z-index: 1000;
+  height: calc(100vh - 4rem);
+  background-color: #f7f7f7;
+  border-right: 1px solid #ececec;
+}
+
+//Font classes
+
+.ovo {
+  font-family: $ovo;
+}
+
+.roboto {
+  font-family: $roboto;
+}
+
+.trirong {
+  font-family: $trirong;
+}
+
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 0 0.4rem #dde4dc;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hotels-container {
+  max-width: 800px;
+}
+
+.title {
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: $info;
+}
+
+.spinner {
+  margin-top: 15rem;
+}
+
+.btn {
+  color: white;
+  &:hover,
+  &:focus {
+    color: white;
+  }
+}
+
+.btn-delete {
+  color: $danger;
+}
+
+//Like
+
+.heart,
+.disabled {
+  width: 2.2em;
+  height: 2.2em;
+}
+
+.heart {
+  color: $danger;
+  cursor: pointer;
+}
+
+.disabled {
+  color: $primary;
+  pointer-events: none;
+}
+
+// Star
+
+.star,
+.disabled {
+  width: 1.8em;
+  height: 1.8em;
+}
+
+.star {
+  color: $warning;
+  cursor: pointer;
+}
+
+.disabled {
+  color: $primary;
+  pointer-events: none;
+}
+
+//Image
+
+@mixin elementAbsolute {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .card-img {
+    min-height: 17rem;
+  }
+}
+
+.img {
+  @include elementAbsolute();
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.card-img-overlay {
+  @include elementAbsolute();
+  background-color: rgba($color: #000000, $alpha: 0.2);
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.comment-avatar {
+  width: 48px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.nav-avatar {
+  width: 36px;
+  aspect-ratio: 1/1;
+}
+
+//Card
+@media (min-width: 770px) {
+  .card-item {
+    min-height: 17rem;
+    max-height: 17rem;
+  }
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+//Comment
+
+.comment-detail-wrapper {
+  background-color: #e7eeeb;
+  border-radius: 5px;
+}
+
+.comment-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+//Input
+
+.form-control {
+  border-radius: 5px;
+  margin-right: 1rem;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: none;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}

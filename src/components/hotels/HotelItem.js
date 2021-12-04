@@ -1,13 +1,15 @@
+import { useState } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import { useParams } from "react-router";
+import CommentList from "../comments/CommentList";
 import Image from "../UI/Image";
 import HotelDetails from "./HotelDetails";
-import CommentList from "../comments/CommentList";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import { useState } from "react";
 
-const HotelItem = ({ hotel, detailPage = true }) => {
+const HotelItem = ({ hotel }) => {
   const [showComments, setShowComments] = useState(false);
+  const params = useParams();
+  const detailPage = !Boolean(params.id);
 
   const handleShowReview = () => {
     setShowComments(!showComments);
@@ -17,23 +19,22 @@ const HotelItem = ({ hotel, detailPage = true }) => {
 
   return (
     <>
-      <Card className="mb-3 border-0">
-        <Row style={{ minHeight: "17rem" }}>
-          <Col md={5}>
-            <Image image={hotel.img} />
-          </Col>
-          <Col md={7} className="d-flex flex-grow-1">
-            <HotelDetails
-              hotel={hotel}
-              onShowReview={handleShowReview}
-              detailPage={detailPage}
-              showComments={showComments}
-            />
-          </Col>
-        </Row>
-      </Card>
+      <Row className="mb-4 card-item overflow-hidden">
+        <Col md={5}>
+          <Image image={hotel.img} />
+        </Col>
+        <Col md={7}>
+          <HotelDetails
+            hotel={hotel}
+            onShowReview={handleShowReview}
+            detailPage={detailPage}
+            showComments={showComments}
+          />
+        </Col>
+      </Row>
       {(detailPage && showComments && commentList) ||
         (!detailPage && commentList)}
+      {detailPage && <hr className="mb-4 hr" />}
     </>
   );
 };

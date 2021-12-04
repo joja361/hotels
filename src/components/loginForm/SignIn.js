@@ -1,15 +1,15 @@
-import Button from "react-bootstrap/Button";
-import InputField from "./InputField";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Layout from "../layout/Layout";
-import * as Yup from "yup";
-import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login, mainAxios } from "../../store/authSlice";
 import { Formik } from "formik";
 import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import * as Yup from "yup";
+import { login, mainAxios } from "../../store/authSlice";
+import Layout from "../layout/Layout";
+import InputField from "./InputField";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -52,10 +52,14 @@ const SignIn = () => {
               <InputField label="Email" name="email" />
               <InputField label="Password" type="password" name="password" />
               {failToLogin && <div style={{ color: "red" }}>{failToLogin}</div>}
-              <Link className="d-block mb-2 w-50" to="/signup">
+              <Link className="d-block mb-2" to="/signup">
                 Sing Up
               </Link>
-              <Button variant="primary" type="submit" className="w-100">
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-100 shadow-none"
+              >
                 Sign in
               </Button>
             </Form>

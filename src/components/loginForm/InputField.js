@@ -8,6 +8,7 @@ const InputField = ({ label, name, type, inline, ...rest }) => {
         {({ field, meta }) => {
           return (
             <Form.Control
+              className="test"
               type={type}
               isInvalid={meta.error && meta.touched}
               {...field}
@@ -29,7 +30,7 @@ const InputField = ({ label, name, type, inline, ...rest }) => {
   );
 
   return (
-    <Form.Group as={inline ? Row : Col} className="mb-4">
+    <Form.Group as={inline ? Row : Col} className="mb-2">
       <Form.Label htmlFor={name} column={inline}>
         {label}
       </Form.Label>
