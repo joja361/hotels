@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import Layout from "../components/layout/Layout";
+import FileUploader from "../components/loginForm/FileUploader";
 import Avatar from "../components/UI/Avatar";
 import { fetchUserDetail } from "../store/authSlice";
 
@@ -19,8 +20,9 @@ const Profile = () => {
   return (
     <Layout>
       <Row>
-        <Col sm={4} xl={3}>
+        <Col sm={4} xl={3} className="d-flex flex-column">
           <Avatar sizeFor="profile-avatar" />
+          <FileUploader />
         </Col>
         <Col sm={8}>
           <h1 className="display-6 ovo">Erol Mulahasanovic</h1>

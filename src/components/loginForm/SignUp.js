@@ -68,7 +68,7 @@ const SignUp = () => {
                 label="Description"
                 name="description"
                 type="textarea"
-                className="mb-2"
+                className="mb-n2"
               />
               <InputField
                 label="Email"
