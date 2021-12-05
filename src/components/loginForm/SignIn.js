@@ -26,8 +26,8 @@ const SignIn = () => {
       let res = await mainAxios.post("/auth/login", values);
       const token = res.data.token;
       const decoded = jwt_decode(token);
-      const { email, role } = decoded;
-      dispatch(login({ token, email, role }));
+      const { email, role, id } = decoded;
+      dispatch(login({ token, email, role, id }));
       history.push(role === "user" ? "/dashboard" : "admin/dashboard");
     } catch {
       setFailToLogin("You entered wrong credentials, please try again");

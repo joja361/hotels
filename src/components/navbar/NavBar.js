@@ -3,12 +3,13 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
-import { logout, userRole } from "../../store/authSlice";
+import { logout, userId, userRole } from "../../store/authSlice";
 import Avatar from "../UI/Avatar";
 
 const NavBar = () => {
   const username = useSelector((store) => store.auth.username);
   const role = useSelector(userRole);
+  const id = useSelector(userId);
   const location = useLocation();
 
   const dispatch = useDispatch();
@@ -20,10 +21,12 @@ const NavBar = () => {
   };
 
   const userWhoIsLogged = role && (
-    <Nav.Link className="d-flex align-items-center">
-      <p className="mb-0 pe-1">{username}</p>
-      <Avatar sizeFor="nav-avatar" />
-    </Nav.Link>
+    <LinkContainer to={`/user/${id}`}>
+      <Nav.Link className="d-flex align-items-center">
+        <p className="mb-0 pe-1">{username}</p>
+        <Avatar sizeFor="nav-avatar" />
+      </Nav.Link>
+    </LinkContainer>
   );
 
   const signInButton = (

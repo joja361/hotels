@@ -62,8 +62,10 @@ const hotelsSlice = createSlice({
 });
 
 export default hotelsSlice;
+
 const { getData, setLoading, setError, addHotel, getHotelDetail } =
   hotelsSlice.actions;
+
 export const { changeRating, changeLike } = hotelsSlice.actions;
 
 export const fetchHotelData = () => {

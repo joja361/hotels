@@ -6,6 +6,7 @@ import AddHotel from "./pages/AddHotel";
 import DashBoard from "./pages/DashBoard";
 import Favorites from "./pages/Favorites";
 import HotelDetail from "./pages/HotelDetail";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <ProtectedRoute exact path="/dashboard/:id" component={HotelDetail} />
       <ProtectedRoute exact path="/favorites" component={Favorites} />
       <ProtectedRoute exact path="/favorites/:id" component={HotelDetail} />
+      <ProtectedRoute exact path="/user/:id" component={Profile} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
