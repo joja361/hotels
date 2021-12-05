@@ -1,10 +1,10 @@
 import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import HotelItem from "../components/hotels/HotelItem";
 import Layout from "../components/layout/Layout";
 import { fetchHotelDetail } from "../store/hotelsSlice";
-import { Container } from "react-bootstrap";
 
 const HotelDetail = () => {
   const params = useParams();
@@ -18,8 +18,10 @@ const HotelDetail = () => {
 
   return (
     <Layout>
-      <Container className="mt-2">
-        <h1 className="display-4">User view</h1>
+      <Container className="hotels-container">
+        <h1 className="display-5 mt-n4 mb-4 text-center title trirong">
+          User view
+        </h1>
         <HotelItem hotel={hotel} detailPage={false} />
       </Container>
     </Layout>

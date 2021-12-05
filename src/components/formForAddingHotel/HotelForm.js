@@ -1,12 +1,12 @@
 import { Formik } from "formik";
 import { Container, Form } from "react-bootstrap";
-import InputField from "../loginForm/InputField";
-import TextField from "../loginForm/TextField";
-import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
-import { addNewHotel } from "../../store/hotelsSlice";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import * as Yup from "yup";
+import { addNewHotel } from "../../store/hotelsSlice";
+import InputField from "../loginForm/InputField";
+import TextField from "../loginForm/TextField";
 
 const HotelForm = () => {
   const history = useHistory();
@@ -48,7 +48,11 @@ const HotelForm = () => {
               <TextField label="Description" name="description" inline />
               <InputField label="Image Link" name="img" type="text" inline />
               <InputField label="Price" name="price" type="number" inline />
-              <Button type="submit" onClick={handleSubmit}>
+              <Button
+                type="submit"
+                className="w-50 d-block mx-auto mt-4"
+                onClick={handleSubmit}
+              >
                 Add Hotel
               </Button>
             </Form>
