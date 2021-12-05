@@ -21,7 +21,9 @@ const initialState = {
   username,
   role,
   id: "",
-  userDetail: {},
+  userDetail: {
+    email: "",
+  },
 };
 
 const authSlice = createSlice({
@@ -33,18 +35,19 @@ const authSlice = createSlice({
       localStorage.setItem("token", token);
       localStorage.setItem("username", email);
       localStorage.setItem("role", role);
-      return {
-        token,
-        username: email,
-        role,
-        id,
-      };
+      return { ...state, token, username: email, role, id };
     },
     logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("role");
-      return { token: null, username: "", role: "", id: "" };
+      return {
+        token: null,
+        username: "",
+        role: "",
+        id: "",
+        userDetail: { email: "" },
+      };
     },
     getUserDetail(state, action) {
       state.userDetail = action.payload;
