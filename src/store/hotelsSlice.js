@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authAxios, mainAxios } from "./authSlice";
-import axios from "axios";
 
 const initialState = {
   hotels: [],

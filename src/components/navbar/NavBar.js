@@ -1,13 +1,15 @@
+import { Nav } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import { NavLink, useHistory, Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+import { useHistory, useLocation } from "react-router-dom";
 import { logout, userRole } from "../../store/authSlice";
 
 const NavBar = () => {
   const username = useSelector((store) => store.auth.username);
   const role = useSelector(userRole);
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,36 +20,36 @@ const NavBar = () => {
   };
 
   const userWhoIsLogged = role && (
-    <div className="d-flex align-items-center  pe-3">
+    <Nav.Link className="d-flex align-items-center">
       <p className="mb-0 pe-1">{username}</p>
       <FaUserAlt />
-    </div>
+    </Nav.Link>
   );
 
   const signInButton = (
-    <Link to="/" className="btn btn-primary">
-      Sign in
-    </Link>
+    <LinkContainer to="/">
+      <Nav.Link>Sign in</Nav.Link>
+    </LinkContainer>
   );
 
-  const signOutButton = <Button onClick={handleLogout}>Sign out</Button>;
-
-  const favorites = role === "user" && (
-    <NavLink className="ps-3" to="favorites">
-      Favorites
-    </NavLink>
-  );
+  const signOutButton = <Nav.Link onClick={handleLogout}>Sign out</Nav.Link>;
 
   return (
-    <Navbar className="d-flex justify-content-between bg-light p-3">
-      <div>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-        {favorites}
-      </div>
-      <div className="d-flex">
+    <Navbar className="justify-content-space px-5 py-3" fixed="top">
+      <Nav className="me-auto" activeKey={location.pathname}>
+        <LinkContainer to="/dashboard">
+          <Nav.Link>Dashboard</Nav.Link>
+        </LinkContainer>
+        {role && (
+          <LinkContainer to="/favorites">
+            <Nav.Link>Favorites</Nav.Link>
+          </LinkContainer>
+        )}
+      </Nav>
+      <Nav activeKey={location.pathname}>
         {userWhoIsLogged}
         {role ? signOutButton : signInButton}
-      </div>
+      </Nav>
     </Navbar>
   );
 };

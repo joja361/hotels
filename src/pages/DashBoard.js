@@ -1,12 +1,11 @@
-import Layout from "../components/layout/Layout";
-import HotelsList from "../components/hotels/HotelsList";
-import Spinner from "../components/UI/Spinner";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchHotelData } from "../store/hotelsSlice";
-import { Container } from "react-bootstrap";
 import { useEffect } from "react";
-import { userRole } from "../store/authSlice";
+import { Container, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import HotelsList from "../components/hotels/HotelsList";
+import Layout from "../components/layout/Layout";
+import { userRole } from "../store/authSlice";
+import { fetchHotelData } from "../store/hotelsSlice";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -30,10 +29,17 @@ const DashBoard = () => {
 
   return (
     <Layout>
-      <Container className="mt-4" style={{ maxWidth: 800 }}>
-        {isLoading && <Spinner />}
+      <Container className="hotels-container">
+        {isLoading && (
+          <Spinner
+            animation="border"
+            variant="info"
+            size="lg"
+            className="d-block mx-auto p-4 spinner"
+          />
+        )}
         {error ? (
-          <h1 className="mt-4 text-center">{error}</h1>
+          <h1 className="text-center">{error}</h1>
         ) : (
           <HotelsList hotels={hotels} />
         )}
