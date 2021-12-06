@@ -1,11 +1,11 @@
+import { Redirect, Route, Switch } from "react-router-dom";
 import SignIn from "./components/loginForm/SignIn";
 import SignUp from "./components/loginForm/SignUp";
+import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
+import AddHotel from "./pages/AddHotel";
 import DashBoard from "./pages/DashBoard";
 import Favorites from "./pages/Favorites";
 import HotelDetail from "./pages/HotelDetail";
-import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
-import { Switch, Route, Redirect } from "react-router-dom";
-import AddHotel from "./pages/AddHotel";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
       <ProtectedRoute exact path="/admin/addhotel" component={AddHotel} />
       <ProtectedRoute exact path="/dashboard/:id" component={HotelDetail} />
       <ProtectedRoute exact path="/favorites" component={Favorites} />
+      <ProtectedRoute exact path="/favorites/:id" component={HotelDetail} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
