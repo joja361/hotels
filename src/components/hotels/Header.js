@@ -1,10 +1,10 @@
+import { Col, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import { mainAxios, userRole } from "../../store/authSlice";
+import { changeLike, changeRating } from "../../store/hotelsSlice";
 import Like from "../UI/Like";
 import Rating from "../UI/Rating";
-import { Card, Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { changeRating, changeLike } from "../../store/hotelsSlice";
-import { mainAxios, userRole } from "../../store/authSlice";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
 const Header = ({ name, city, rating, like, id, detailPage }) => {
   const match = useRouteMatch();
@@ -45,7 +45,7 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
 
   const link = (
     <Link
-      className="display-6"
+      className="display-6 ovo"
       style={{ color: "black", textDecoration: "none" }}
       to={`${match.url}/${id}`}
       target="_blank"
@@ -55,28 +55,36 @@ const Header = ({ name, city, rating, like, id, detailPage }) => {
   );
 
   return (
-    <Container className="d-flex justify-content-between align-items-center mb-2 p-0">
-      <div>
-        {detailPage && role ? (
-          link
-        ) : (
-          <Card.Title className="display-6">{name}</Card.Title>
-        )}
-        <p className="text-muted mb-0">{city}</p>
-      </div>
-      <Like
-        like={like}
-        hotelId={id}
-        onLike={handleLike}
-        disabled={IsUserAdmin}
-      />
-      <Rating
-        rating={rating}
-        hotelId={id}
-        onRating={handleRating}
-        disabled={IsUserAdmin}
-      />
-    </Container>
+    <>
+      <Row className="align-items-center">
+        <Col xs="auto">
+          {detailPage && role ? (
+            link
+          ) : (
+            <h1 className="display-6 ovo">{name}</h1>
+          )}
+        </Col>
+        <Col xs="auto" className="ms-auto me-4">
+          <Like
+            like={like}
+            hotelId={id}
+            onLike={handleLike}
+            disabled={IsUserAdmin}
+          />
+        </Col>
+        <Col xs="auto">
+          <Rating
+            rating={rating}
+            hotelId={id}
+            onRating={handleRating}
+            disabled={IsUserAdmin}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <p className="text-muted mb-0 trirong">{city}</p>
+      </Row>
+    </>
   );
 };
 

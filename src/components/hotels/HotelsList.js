@@ -5,7 +5,7 @@ const HotelsList = ({ hotels }) => {
     <HotelItem key={hotel.id} hotel={hotel} />
   ));
 
-  return <div className="mt-4">{HotelList}</div>;
+  return <>{HotelList}</>;
 };
 
 export default HotelsList;

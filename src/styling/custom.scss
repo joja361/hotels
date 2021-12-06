@@ -1,0 +1,17 @@
+$primary: #667c99;
+$info: #2d3340;
+$danger: #f44336;
+$warning: #d6da14;
+$success: #54a066;
+
+$navbar-light-color: $info;
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;
+
+$btn-border-radius: 5px;
+
+$enable-negative-margins: true;
+
+$grid-gutter-width: 0;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";

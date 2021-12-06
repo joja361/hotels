@@ -1,15 +1,12 @@
-import Button from "react-bootstrap/Button";
-import InputField from "./InputField";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import RadioButtons from "./RadioButtons";
-import Layout from "../layout/Layout";
-import * as Yup from "yup";
-import { Link, useHistory } from "react-router-dom";
 import { Formik } from "formik";
-import TextField from "./TextField";
+import { Button, Container, Form, Row } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import * as Yup from "yup";
 import { mainAxios } from "../../store/authSlice";
+import Layout from "../layout/Layout";
+import InputField from "./InputField";
+import RadioButtons from "./RadioButtons";
+import TextField from "./TextField";
 
 const SignUp = () => {
   const history = useHistory();
@@ -30,9 +27,9 @@ const SignUp = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
-    address: Yup.string().required("Required"),
-    gender: Yup.string().required("Required"),
-    description: Yup.string().required("Required"),
+    address: Yup.string(),
+    gender: Yup.string(),
+    description: Yup.string(),
     email: Yup.string().email("Entered invalid e-mail").required("Required"),
     password: Yup.string().required("Required").min(8, "Password is too short"),
     passwordConfirmation: Yup.string()
@@ -71,7 +68,7 @@ const SignUp = () => {
                 label="Description"
                 name="description"
                 type="textarea"
-                className="mb-2"
+                className="mb-n2"
               />
               <InputField
                 label="Email"
@@ -90,7 +87,11 @@ const SignUp = () => {
               <Link className="d-block mb-2 w-50" to="/signin">
                 Sign in
               </Link>
-              <Button variant="primary" type="submit" className="w-100">
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-100 shadow-none"
+              >
                 Sign up
               </Button>
             </Form>
